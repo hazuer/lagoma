@@ -129,9 +129,3 @@ function getLsPrivilegiosMod ($id_user,$id_system_modulos)
     </section>
   </section>
 </section>
-<!-- Bootstrap -->
-<!-- App -->
-<!-- datatables -->
-<script src="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src ="<?php echo base_url(); ?>assets/js/datatables/demo.js" ></script>  
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/datatables/jquery.dataTables.css" type="text/css" />

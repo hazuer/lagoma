@@ -104,6 +104,6 @@
   </section>
 </section>
 
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/formValidation.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/framework/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation-bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/validate_wizard.js"></script>

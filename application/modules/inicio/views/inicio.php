@@ -1,4 +1,4 @@
- <!--/.aside-->  
+ <!--/.aside-->
 <style>
     section #content
     {
@@ -10,14 +10,14 @@
     <section class="scrollable padder">
         <?php
         echo $breadcrumb;
-        foreach($desc_mod_submod  as $rows): 
-        ?>            
-        <div class="m-b-md">            
+        foreach($desc_mod_submod  as $rows):
+        ?>
+        <div class="m-b-md">
              <h3 class="text-dark"><?php echo $rows->modulo ?><br></h3>
              <h5><?php echo $rows->submodulo ?></h5>
         </div>
-        <?php 
-        endforeach 
+        <?php
+        endforeach
         ?>
 
     </section>

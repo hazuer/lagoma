@@ -1,12 +1,3 @@
-<?php
-$contador=0;
-for($i=0;$i>1000;$i++){ 
-    echo $i;
-    echo "<br>";
-$contador =$contador +1;
-}
-echo "N_".$contador
-?>
 <div class="container" style="margin-top:120px">
         <div class="row">
         <div class="center-block" title="SCOP">
@@ -86,7 +77,6 @@ echo "N_".$contador
 </div>
 </div>
 
-
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/formValidation.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/framework/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/validate_wizard.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation-bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/modules/login/login.js"></script>

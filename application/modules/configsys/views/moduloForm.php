@@ -17,7 +17,6 @@
        $titleBtn  ="Actualizar";
     }
 ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/formvalidator/formValidation.css" type="text/css" />
 <!-- /.aside --> 
 <section id="content">
   <section class="vbox">
@@ -155,6 +154,6 @@
   </section>
 </section>
 
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/formValidation.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/formvalidator/framework/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/validate_wizard.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation-bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/modules/configsys/validaModulo.js"></script>

@@ -16,7 +16,7 @@ class Configsys extends CI_Controller
         $this->data['activeTab']    =$this->data['idModule'];
     }
 
-    function index() 
+    function index()
     {
         #Se incluye el helper para validacion de modulos y submodulos
         $this->data['idSubModule']=1;
@@ -30,14 +30,14 @@ class Configsys extends CI_Controller
         $this->load->view('main_template', $this->data);
     }
 
-    function modulosLs() 
-    {
+    function modulosLs() {
         #Se incluye el helper para validacion de modulos y submodulos
         $this->data['idSubModule']=2;
         validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
 
         $this->data['breadcrumb']        =breadcrumb($this->data['idModule'],$this->data['idSubModule']);
         $this->data['contenidoPrincial'] = 'configsys/modulosLs';
+		$this->data['desc_mod_submod'] = $this->configsys_model->getDesd_mod_submod($this->data['idSubModule']);
         $this->data['results']           = $this->configsys_model->get_todosLosModulos();
 
         $this->load->view('main_template', $this->data);
