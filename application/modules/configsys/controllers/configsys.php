@@ -30,26 +30,6 @@ class Configsys extends CI_Controller
         $this->load->view('main_template', $this->data);
     }
 
-    function demo($idParameter)
-    {
-
-        $this->data['idSubModule']=2;
-        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
-
-        $this->data['breadcrumb']        =breadcrumb($this->data['idModule'],$this->data['idSubModule']);
-
-        $idParameter = url_decode($idParameter); //Decodificamos el parametro recibido
-
-        $this->data['contenidoPrincial'] = 'configsys/moduloForm';
-        $this->data['idParameter']       = $idParameter;  
-        if($idParameter!=0)
-        {
-            $this->data['results'] = $this->configsys_model->get_allData("system_modulos","id_system_modulos",$idParameter);
-        }
-        //$this->load->view('main_template', $this->data);
-
-        $this->load->view('configsys/demo123', $this->data);
-    }
 
     function modulosLs() {
         #Se incluye el helper para validacion de modulos y submodulos
@@ -64,24 +44,18 @@ class Configsys extends CI_Controller
         $this->load->view('main_template', $this->data);
     }
 
-    function moduloForm($idParameter)
-    {
+    function moduloForm($idParameter) {
          #Se incluye el helper para validacion de modulos y submodulos
         $this->data['idSubModule']=2;
         validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
 
-        $this->data['breadcrumb']        =breadcrumb($this->data['idModule'],$this->data['idSubModule']);
-
         $idParameter = url_decode($idParameter); //Decodificamos el parametro recibido
 
-        $this->data['contenidoPrincial'] = 'configsys/moduloForm';
-        $this->data['idParameter']       = $idParameter;  
-        if($idParameter!=0)
-        {
+        $this->data['idParameter']       = $idParameter;
+        if($idParameter!=0) {
             $this->data['results'] = $this->configsys_model->get_allData("system_modulos","id_system_modulos",$idParameter);
         }
-        $this->load->view('main_template', $this->data);
-
+        $this->load->view('configsys/moduloForm', $this->data);
     }
 
     function moduloAction()
@@ -89,61 +63,57 @@ class Configsys extends CI_Controller
         #Se incluye el helper para validacion de modulos y submodulos
         $this->data['idSubModule']=2;
         validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
-
-        $this->data['breadcrumb'] =breadcrumb($this->data['idModule'],$this->data['idSubModule']);
-
         $this->form_validation->set_rules('modulo', 'Modulo', 'trim|required|xss_clean');
         $this->form_validation->set_rules('desc_modulo', 'Descripcion del modulo', 'trim|required|xss_clean');
         $this->form_validation->set_rules('urlControlador', 'Debe especficar la url del controlador', 'trim|required|xss_clean');
         $this->form_validation->set_rules('icono', 'Nombre del icono', 'trim|required|xss_clean');
-
         extract( $this->input->post(), EXTR_OVERWRITE);
+        $result = [
+			'success'  => 'false',
+			'info'     => 'Error de validación de datos',
+			'message'  => ''
+		];
 
-        if ($action=="new")
-            {
-                if($this->form_validation->run() == FALSE)
-                   {
+        if($this->form_validation->run() == FALSE) {
+            echo json_encode($result);
+            die();
+        }
+        $datos = array('modulo' => $modulo,
+        'desc_modulo'    => $desc_modulo,
+        'urlControlador' => $urlControlador,
+        'icono'          => $icono,
+        'classColor'     => $classColor);
 
-                        $this->data['idParameter']       = 0;
-                        $this->load->view('main_template', $this->data);
-                    }else
-                        {
-                             $datos = array('id_system_modulos' => null,
-                             'modulo'         => $modulo,
-                             'desc_modulo'    => $desc_modulo,
-                             'desc_modulo'    => $desc_modulo,
-                             'urlControlador' => $urlControlador,
-                             'icono'          => $icono,
-                             'classColor'     => $classColor);
-                             $this->db->INSERT('system_modulos', $datos);  
-                             $getLastInserted=$this->db->insert_id(); 
-                            
-                             #Damos de alta el privilegio al administrador
-                             $datos = array('id_system_modulos_privilegios' => null,
-                             'id_modulo' => $getLastInserted,
-                             'id_user' => 1,
-                             'status' => 1);
-                             $this->db->INSERT('system_modulos_privilegios', $datos); 
-                            
-                             $getLastInserted = url_encode($getLastInserted);//Se encripta el parametro enviado
+        if ($action=="new") {
+            $datos['id_system_modulos'] = null;
+            $this->db->INSERT('system_modulos', $datos);  
+            $getLastInserted=$this->db->insert_id(); 
 
-                             redirect('configsys/moduloForm/'.$getLastInserted, 'refresh');
+            #Damos de alta el privilegio al administrador
+            $permisos = array('id_system_modulos_privilegios' => null,
+            'id_modulo' => $getLastInserted,
+            'id_user' => 1,
+            'status' => 1);
+            $this->db->INSERT('system_modulos_privilegios', $permisos); 
 
-                        }
-            }else if($action=="edit")
-            {
-                // echo"update";
-                $datos = array('modulo' => $modulo,
-                'desc_modulo'    => $desc_modulo,
-                'urlControlador' => $urlControlador,
-                'icono'          => $icono,
-                'classColor'     => $classColor);
-                $this->db->WHERE('id_system_modulos', $id_system_modulos);
-                $this->db->UPDATE('system_modulos', $datos);
+            $result = [
+                'success'  => 'true',
+                'info'     => 'Registro guardado de forma exitosa',
+                'message'  => $getLastInserted
+            ];
 
-                $id_system_modulos = url_encode($id_system_modulos);//Se encripta el parametro enviado
-                redirect('configsys/moduloForm/'.$id_system_modulos, 'refresh');
-            }
+        }else if($action=="edit") {
+            $this->db->WHERE('id_system_modulos', $id_system_modulos);
+            $this->db->UPDATE('system_modulos', $datos);
+            $result = [
+                'success'  => 'true',
+                'info'     => 'Registro actualizado',
+                'message'  => ''
+            ];
+        }
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result);
+        die();
     }
 
 

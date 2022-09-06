@@ -5,8 +5,8 @@
  */
 
 //Valida alta y edición de modulos
-var validaModulo = $("#validaModulo");
-$(document).ready(function()  {
+$(document).ready(function() {
+    let  validaModulo = $("#validaModulo");
     validaModulo.formValidation ({
         framework: 'bootstrap',
         excluded: [':disabled'],
@@ -46,4 +46,70 @@ $(document).ready(function()  {
             }
         }
     });
+    
 });
+
+let id_system_modulos = $('#id_system_modulos');
+let action            = $('#action');
+let modulo            = $('#modulo');
+let desc_modulo       = $('#desc_modulo');
+let urlControlador    = $('#urlControlador');
+let icono             = $('#icono');
+let classColor        = $('#classColor');
+
+function sendData(){
+
+    if( modulo.val()=='' || desc_modulo.val()=='' || urlControlador.val()=='' || icono.val()==''){
+        swal("Attention!", "Required fields (*)", "warning");
+        return false;
+    }
+
+    console.log('continue');
+    let formData = new FormData();
+    formData.append('id_system_modulos',id_system_modulos.val());
+    formData.append('action',action.val());
+    formData.append('modulo',modulo.val());
+    formData.append('desc_modulo',desc_modulo.val());
+    formData.append('urlControlador',urlControlador.val());
+    formData.append('icono',icono.val());
+    formData.append('classColor',classColor.val());
+    $.ajax({
+        url : 'moduloAction',
+        type: 'POST',
+        data:formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function() {
+          showSwal();
+          $('.swal-button-container').hide();
+        }
+      })
+      .done(function(response) {
+            swal.close();
+            console.log(response);
+           if(response.success==='true'){
+                //$('#modal-business').modal('hide');
+                swal('Exito', response.info, "success");
+                setTimeout(function(){
+                   window.location.href = "modulosLs";
+                }, 1000);
+                return false;
+            }else{
+                swal('Error', response.info, "warning");
+            }
+        }).fail(function(e) {
+            console.log("error",e);
+        });
+
+}
+
+    const showSwal = () => {
+        swal({
+            title            : "Procesando...",
+            text             : "Espere por favor",
+            icon             : "../assets/images/ajax-loader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+    }

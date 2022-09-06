@@ -5,8 +5,10 @@
 	<!-- Bootstrap --> 
 	<!-- App -->
 
+	<!-- 
 	<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation-bootstrap.min.js"></script>
+	-->
 
 	<!-- datatables -->
 	<script src="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.min.js"></script>
