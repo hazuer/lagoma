@@ -34,7 +34,7 @@
               "value" => $submodulo]; 
               $this->crearelemento->Input($atribInput);
               ?>
-              <table class="table table-striped table-bordered m-b-none" data-ride="datatables_1">
+              <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesGeneric">
                 <thead>
                   <tr>
                     <th>id_system_users</th>

@@ -9,9 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/app.v1.css" type="text/css" />
-		<script src="https://code.jquery.com/jquery-3.6.1.js"
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-	crossorigin="anonymous"></script>
+		<script src="<?php echo base_url(); ?>assets/js/jquery-3.6.1.js"></script>
 	</head>
 <body class="">
 <section class="vbox"><!--1-->

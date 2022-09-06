@@ -35,7 +35,7 @@
               $this->crearelemento->Input($atribInput);
               ?>       
             <div class="table-responsive">
-              <table class="table table-striped table-bordered m-b-none" data-ride="datatables_2">
+              <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesCustom">
                 <thead>
                   <tr>
                     <th>Modulo</th>
@@ -203,3 +203,5 @@ function getLsPrivilegiosSubMod ($id_user,$id_system_submodulo)
     </section>
   </section>
 </section>
+
+<script src ="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.custom.js" ></script>

@@ -20,7 +20,7 @@
           <header class="panel-heading font-bold">Listado de submodulos</header>
           
           <div class="table-responsive">
-            <table class="table table-striped table-bordered m-b-none" data-ride="datatables_1">
+            <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesGeneric">
               <thead>
                 <tr>
                   <th>id_system_submodulo</th>

@@ -30,6 +30,27 @@ class Configsys extends CI_Controller
         $this->load->view('main_template', $this->data);
     }
 
+    function demo($idParameter)
+    {
+
+        $this->data['idSubModule']=2;
+        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
+
+        $this->data['breadcrumb']        =breadcrumb($this->data['idModule'],$this->data['idSubModule']);
+
+        $idParameter = url_decode($idParameter); //Decodificamos el parametro recibido
+
+        $this->data['contenidoPrincial'] = 'configsys/moduloForm';
+        $this->data['idParameter']       = $idParameter;  
+        if($idParameter!=0)
+        {
+            $this->data['results'] = $this->configsys_model->get_allData("system_modulos","id_system_modulos",$idParameter);
+        }
+        //$this->load->view('main_template', $this->data);
+
+        $this->load->view('configsys/demo123', $this->data);
+    }
+
     function modulosLs() {
         #Se incluye el helper para validacion de modulos y submodulos
         $this->data['idSubModule']=2;

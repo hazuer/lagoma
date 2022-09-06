@@ -155,5 +155,29 @@ Class Crearelemento
             }
         echo $this->link;
     }
+
+    function LoadModal($href, $valuesUrl,$btnClass,$btnText,$iconFa)
+    {
+        unset($this->link);
+        $CI = & get_instance(); 
+        $this->psmu = $CI->session->userdata('psmu');
+
+        $this->href = $href;
+        $this->valuesUrl = $valuesUrl;
+        $this->btnClass=$btnClass;
+        $this->btnText=$btnText;
+        $this->iconFa = $iconFa;
+
+        #Perfil para solo consulta
+        if($this->psmu==3)
+        {
+            $this->link = " ";
+        }
+        else
+            {
+                $this->link = "<a class='".$this->btnClass."' href='".$this->href."".$this->valuesUrl."' data-toggle=\"ajaxModal\"> <i class='".$this->iconFa."'></i> ".$this->btnText."</a> ";
+            }
+        echo $this->link;
+    }
 }
 ?>
