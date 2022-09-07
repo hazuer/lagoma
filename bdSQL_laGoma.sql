@@ -292,7 +292,7 @@ CREATE TABLE `persona` (
   `id_persona` int(10) UNSIGNED ZEROFILL NOT NULL COMMENT '	',
   `curp` varchar(18) NOT NULL,
   `ap_paterno` varchar(50) NOT NULL,
-  `ap_materno` varchar(50) DEFAULT NULL,
+  `ap_materno` varchar(50) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='tabla que contiene la información del personal';
 
@@ -301,9 +301,8 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`id_persona`, `curp`, `ap_paterno`, `ap_materno`, `nombre`) VALUES
-(0000000001, '--', 'Cornelio', 'Landa', 'Brenda'),
-(0000000002, '--', 'Cornelio', 'Landa', 'Isidoro'),
-(0000000003, '--', 'Marcelo', 'Morales', 'Susy');
+(0000000001, 'ABC', 'Cornelio', 'Landa', 'Brenda'),
+(0000000002, '123', 'Cornelio', 'Landa', 'Isidoro');
 
 -- --------------------------------------------------------
 
@@ -313,7 +312,7 @@ INSERT INTO `persona` (`id_persona`, `curp`, `ap_paterno`, `ap_materno`, `nombre
 
 CREATE TABLE `system_modulos` (
   `id_system_modulos` int(11) NOT NULL,
-  `modulo` varchar(20) DEFAULT NULL,
+  `modulo` varchar(50) DEFAULT NULL,
   `desc_modulo` varchar(150) DEFAULT NULL,
   `urlControlador` varchar(50) NOT NULL,
   `icono` varchar(30) NOT NULL,

@@ -8,7 +8,20 @@
          <div class="modal-body">
             . . . 
          </div>
-         <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Close</a> <a href="#" class="btn btn-primary">Save</a> </div>
+         <div class="modal-footer">
+				<?php
+					$atribButton = [
+						"type"    => "submit",
+						"id"      => "guardar",
+						"name"    => "guardar",
+						"value"   => "guardar",
+						"class"   => "btn btn-primary",
+						"onclick" => "sendData()",
+					];
+					$this->crearelemento->Button($atribButton, $titleBtn, "fa fa-save");
+				?>
+				<a href="#" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</a>
+			</div>
       </div>
    </div>
 </div>

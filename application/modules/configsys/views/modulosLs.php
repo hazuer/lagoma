@@ -14,7 +14,7 @@
 				endforeach
 			?>
 			<div class="col-sm-12">
-				<?php $this->crearelemento->LoadModal(base_url()."configsys/moduloForm/",url_encode(0),"btn btn-info","Agregar modulo","fa fa-plus");?>
+				<?php $this->crearelemento->LoadModal("moduloForm/",url_encode(0),"btn btn-info","Agregar modulo","fa fa-plus");?>
 			</div>
 
 			<div class="col-md-12">
@@ -39,8 +39,7 @@
 										<td><small>" . $result->desc_modulo . "</small></td>
 										<td align='center'>";
 										$this->crearelemento->LoadModal("moduloForm/",url_encode($result->id_system_modulos),"btn btn-default btn-xs","Editar","fa fa-edit");
-										echo"
-										</td>
+										echo"</td>
 									</tr>";
 								}
 								?>

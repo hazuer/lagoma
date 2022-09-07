@@ -38,6 +38,21 @@ Class Configsys_model extends CI_Model {
 		$query = $this->db->query($sqlUsuarios);
 		return $query->result();
 	}
+	function getLoadUserPerson($id_system_users) {
+		$sqlUsuarios="SELECT 
+		system_users.id_system_users, 
+		persona.ap_paterno,
+		persona.ap_materno, 
+		persona.nombre, 
+		persona.curp,
+		system_users.usuario, 
+		system_users.status
+		FROM persona,system_users 
+		WHERE system_users.id_persona=persona.id_persona 
+		and system_users.id_system_users=$id_system_users";
+		$query = $this->db->query($sqlUsuarios);
+		return $query->result();
+	}
 
 	function get_allData($tbl,$campo,$idParameter) {
 		$this->db-> SELECT('*');

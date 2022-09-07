@@ -46,7 +46,7 @@ $(document).ready(function() {
             }
         }
     });
-    
+
 });
 
 let id_system_modulos = $('#id_system_modulos');
@@ -64,7 +64,6 @@ function sendData(){
         return false;
     }
 
-    console.log('continue');
     let formData = new FormData();
     formData.append('id_system_modulos',id_system_modulos.val());
     formData.append('action',action.val());
@@ -87,9 +86,7 @@ function sendData(){
       })
       .done(function(response) {
             swal.close();
-            console.log(response);
            if(response.success==='true'){
-                //$('#modal-business').modal('hide');
                 swal('Exito', response.info, "success");
                 setTimeout(function(){
                    window.location.href = "modulosLs";
@@ -104,12 +101,12 @@ function sendData(){
 
 }
 
-    const showSwal = () => {
-        swal({
-            title            : "Procesando...",
-            text             : "Espere por favor",
-            icon             : "../assets/images/ajax-loader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false
-        });
-    }
+const showSwal = () => {
+    swal({
+        title            : "Procesando...",
+        text             : "Espere por favor",
+        icon             : "../assets/images/ajax-loader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false
+    });
+}

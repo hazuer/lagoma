@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/app.v1.css" type="text/css" />
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.6.1.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
 
 	</head>
 <body class="">
