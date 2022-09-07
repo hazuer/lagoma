@@ -30,7 +30,7 @@
                   <td>".$result->nombrecompleto."</td>
                   <td>".$result->usuario."</td>
                   <td align='center'>";
-                    $this->crearelemento->Link("cambiarUsuarioAction/",url_encode($result->id_system_users),"btn btn-info btn-xs","Entrar","fa fa-sign-in");
+                    $this->crearelemento->Link("cambiarUsuarioAction/",url_encode($result->id_system_users),"btn btn-primary btn-xs","Entrar","fa fa-sign-in");
                   echo"</td>
                 </tr>";
                 }

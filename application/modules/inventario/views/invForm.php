@@ -45,7 +45,7 @@ $efectivo="";
       </div>
 
       <div class="col-md-12">
-        <a href="<?php echo base_url();?>inventario/" class="btn btn-s-md btn-danger"><i class="fa fa-chevron-left"></i> Regresar</a>
+        <a href="<?php echo base_url();?>inventario/" class="btn btn-s-md btn-info"><i class="fa fa-chevron-left"></i> Regresar</a>
       </div>
 
       <div class="col-md-12">

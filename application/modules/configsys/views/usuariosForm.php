@@ -3,15 +3,16 @@
 		$id_system_users = "";
 		$id_persona      = "";
 		$usuario         = "";
-		$status          = "";
+		$nombre          = "";
+		$ap_paterno      = "";
+		$ap_materno      = "";
+		$curp            = "";
 		$titleForm       = "Agregar usuario";
 		$titleButton     = "Agregar";
 		$action          = "new";
 		$editarCampo     = True;
-		$status          = "selecciona";
 		$titleBtn        = "Agregar";
-	}
-	else {
+	} else {
 		extract(get_object_vars($results[0]));
 		$titleForm   = "Datos del usuario";
 		$titleButton = "Actualizar";
@@ -33,13 +34,18 @@
 					<?php
 					$atribInput = [
 					"type"  => "hidden",
+					"id"    => "id_persona",
+					"name"  => "id_persona",
+					"value" => $id_persona];
+					$this->crearelemento->Input($atribInput);
+
+					$atribInput = [
+					"type"  => "hidden",
 					"id"    => "id_system_users",
 					"name"  => "id_system_users",
 					"value" => $id_system_users];
 					$this->crearelemento->Input($atribInput);
-					?>
 
-					<?php 
 					$atribInput = [
 					"type"  => "hidden",
 					"id"    => "action",
@@ -56,8 +62,7 @@
 							"id"        => "nombre",
 							"name"      => "nombre",
 							"value"     => $nombre,
-							"class"     => "form-control",
-							"autofocus" => ""];
+							"class"     => "form-control"];
 							$this->crearelemento->Input($atribInput);
 							?>
 							<?php echo form_error('nombre'); ?>
@@ -72,8 +77,7 @@
 							"id"        => "ap_paterno",
 							"name"      => "ap_paterno",
 							"value"     => $ap_paterno,
-							"class"     => "form-control",
-							"autofocus" => ""];
+							"class"     => "form-control"];
 							$this->crearelemento->Input($atribInput);
 							?>
 							<?php echo form_error('ap_paterno'); ?>
@@ -88,8 +92,7 @@
 							"id"        => "ap_materno",
 							"name"      => "ap_materno",
 							"value"     => $ap_materno,
-							"class"     => "form-control",
-							"autofocus" => ""];
+							"class"     => "form-control"];
 							$this->crearelemento->Input($atribInput);
 							?>
 							<?php echo form_error('ap_materno'); ?>
@@ -100,12 +103,13 @@
 						<div class="col-md-8">
 							<?php
 							$atribInput = [
-							"type"      => "text",
-							"id"        => "curp",
-							"name"      => "curp",
-							"value"     => $curp,
-							"class"     => "form-control",
-							"autofocus" => ""];
+								"type"      => "text",
+								"id"        => "curp",
+								"name"      => "curp",
+								"value"     => $curp,
+								"class"     => "form-control"
+							];
+							(!$editarCampo) ? $atribInput["disabled"]="disabled":'' ;
 							$this->crearelemento->Input($atribInput);
 							?>
 							<?php echo form_error('curp'); ?>
@@ -121,8 +125,7 @@
 							"id"        => "usuario",
 							"name"      => "usuario",
 							"value"     => $usuario,
-							"class"     => "form-control",
-							"autofocus" => ""];
+							"class"     => "form-control"];
 							$this->crearelemento->Input($atribInput);
 							?>
 							<?php echo form_error('usuario'); ?>

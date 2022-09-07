@@ -40,6 +40,7 @@ Class Configsys_model extends CI_Model {
 	}
 	function getLoadUserPerson($id_system_users) {
 		$sqlUsuarios="SELECT 
+		persona.id_persona,
 		system_users.id_system_users, 
 		persona.ap_paterno,
 		persona.ap_materno, 

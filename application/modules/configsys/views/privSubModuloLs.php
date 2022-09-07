@@ -34,7 +34,7 @@
                   <td>".$result->modulo."</td>
                   <td>".$result->submodulo."</td>
                   <td align='center'>";
-                    $this->crearelemento->Link("privSubModuloForm/",url_encode($result->id_system_submodulo)."/".url_encode($result->submodulo),"btn btn-info btn-xs","Administrar","fa fa-eye");
+                    $this->crearelemento->Link("privSubModuloForm/",url_encode($result->id_system_submodulo)."/".url_encode($result->submodulo),"btn btn-primary btn-xs","Administrar","fa fa-eye");
                   echo"</td>
                 </tr>";
                 }

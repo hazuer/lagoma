@@ -34,7 +34,7 @@
                   <td>".$result->modulo."</td>
                   <td>".$result->desc_modulo."</td>
                   <td align='center'>";
-                    $this->crearelemento->Link("privModuloForm/",url_encode($result->id_system_modulos)."/".url_encode($result->modulo),"btn btn-info btn-xs","Administrar","fa fa-eye");
+                    $this->crearelemento->Link("privModuloForm/",url_encode($result->id_system_modulos)."/".url_encode($result->modulo),"btn btn-primary btn-xs","Administrar","fa fa-eye");
                   echo"</td>
                 </tr> ";
                 }

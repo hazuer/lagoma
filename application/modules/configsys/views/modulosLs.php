@@ -38,7 +38,7 @@
 										<td><small>" . $result->modulo . "</small></td>
 										<td><small>" . $result->desc_modulo . "</small></td>
 										<td align='center'>";
-										$this->crearelemento->LoadModal("moduloForm/",url_encode($result->id_system_modulos),"btn btn-default btn-xs","Editar","fa fa-edit");
+										$this->crearelemento->LoadModal("moduloForm/",url_encode($result->id_system_modulos),"btn btn-primary btn-xs","Editar","fa fa-edit");
 										echo"</td>
 									</tr>";
 								}

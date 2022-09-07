@@ -73,10 +73,10 @@ function sendData(){
     formData.append('icono',icono.val());
     formData.append('classColor',classColor.val());
     $.ajax({
-        url : 'moduloAction',
-        type: 'POST',
-        data:formData,
-        cache: false,
+        url        : 'moduloAction',
+        type       : 'POST',
+        data       : formData,
+        cache      : false,
         contentType: false,
         processData: false,
         beforeSend: function() {

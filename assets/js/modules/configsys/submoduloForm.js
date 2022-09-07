@@ -29,9 +29,9 @@ $(document).ready(function(){
 });
 
 let id_system_submodulo = $('#id_system_submodulo');
-let action            = $('#action');
-let id_modulo            = $('#id_modulo');
-let submodulo       = $('#submodulo');
+let action              = $('#action');
+let id_modulo           = $('#id_modulo');
+let submodulo           = $('#submodulo');
 
 function sendData(){
 
@@ -46,10 +46,10 @@ function sendData(){
     formData.append('id_modulo',id_modulo.val());
     formData.append('submodulo',submodulo.val());
     $.ajax({
-        url : 'submoduloAction',
-        type: 'POST',
-        data:formData,
-        cache: false,
+        url        : 'submoduloAction',
+        type       : 'POST',
+        data       : formData,
+        cache      : false,
         contentType: false,
         processData: false,
         beforeSend: function() {

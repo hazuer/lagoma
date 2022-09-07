@@ -245,102 +245,111 @@ class Configsys extends CI_Controller {
             die();
         }
 
-        $sqlExistPerson = "SELECT id_persona FROM persona WHERE curp='$curp' LIMIT 1";
-        $respExistP      = $this->db->query($sqlExistPerson);
-        if ($respExistP->num_rows() == 1) { #El usuario ya existe
-            $result = [
-                'success'  => 'false',
-                'info'     => 'La curp:'.$curp.' de la persona ya esta registrada',
-                'message'  => ''
-            ];
-            echo json_encode($result);
-            die();
-        }
-
-        $sqlExistUser = "SELECT id_system_users FROM system_users WHERE usuario='$usuario' and status=1 limit 1";
-        $respExistU      = $this->db->query($sqlExistUser);
-        if ($respExistU->num_rows() == 1) { #El usuario ya existe
-            $result = [
-                'success'  => 'false',
-                'info'     => 'El nombre de usuario:'.$usuario.' ya esta registrado',
-                'message'  => ''
-            ];
-            echo json_encode($result);
-            die();
-        }
-
         if ($action=="new") {
-            
-                $dtsP = array('id_persona' => null,
-                'curp' => $curp,
-                'ap_paterno' => $ap_paterno,
-                'ap_materno' => $ap_materno,
-                'nombre' => $nombre);
-                $this->db->insert('persona', $dtsP); 
-                #Obtenemos el ultimo ID
-                $id_persona=$this->db->insert_id(); 
 
-                // echo "<br>Agregar el usuario en la tabla de system_users";
-                $datos = array('id_system_users' => null,
-                'id_persona' => $id_persona,
-                'usuario' => $usuario,
-                'password' => MD5($password),
-                'status'=>1);
-                $this->db->insert('system_users', $datos); 
-                #Obtenemos el ultimo ID
-                $getLastInserted=$this->db->insert_id(); 
-
-                ###PRIVILEGIOS POR MODULO -INICIO
-                $datos = array('id_system_modulos_privilegios' => null,
-                'id_modulo' => 2,
-                'id_user' => $getLastInserted,
-                'status' => 1);
-                $this->db->INSERT('system_modulos_privilegios', $datos); 
-
-                ###PRIVILEGIOS POR SUBMODULO
-                #8 Pagina de bienvenida al usuario
-                $datos = array('id_system_submodulo_privilegios' => null,
-                'id_submodulo' => 8,
-                'id_user' => $getLastInserted,
-                'status' => 1);
-                $this->db->INSERT('system_submodulo_privilegios', $datos);
-                #9 Cambiar clave de acceso
-                $datos = array('id_system_submodulo_privilegios' => null,
-                'id_submodulo' => 9,
-                'id_user' => $getLastInserted,
-                'status' => 1);
-                $this->db->INSERT('system_submodulo_privilegios', $datos);
-                #10 Acceso no autorizado 
-                $datos = array('id_system_submodulo_privilegios' => null,
-                'id_submodulo' => 10,
-                'id_user' => $getLastInserted,
-                'status' => 1);
-                $this->db->INSERT('system_submodulo_privilegios', $datos);
-
-                #$getLastInserted = url_encode($getLastInserted);//Se encripta el parametro enviado
-                #redirect('configsys/usuariosForm/'.$getLastInserted, 'refresh');
+            $sqlExistPerson = "SELECT id_persona FROM persona WHERE curp='$curp' LIMIT 1";
+            $respExistP     = $this->db->query($sqlExistPerson);
+            if ($respExistP->num_rows() == 1) { #El usuario ya existe
                 $result = [
-                    'success'  => 'true',
-                    'info'     => 'Usuario registrado',
-                    'message'  => $getLastInserted
+                    'success'  => 'false',
+                    'info'     => 'La curp:'.$curp.' de la persona ya esta registrada',
+                    'message'  => ''
                 ];
-            /*}   */
-        } else if($action=="edit") {
-            //echo"actualizar los datos de usuario";
-            /*if($this->form_validation->run() == FALSE)
-                {*/
-                // echo "<br> no paso".$id_system_users;
-                //echo "<br>".$status;
-                $datos = array('status' => $status,
-                'usuario' => $usuario,
-                'password' => MD5($password));
-                $this->db->WHERE('id_system_users', $id_system_users);
-                $this->db->UPDATE('system_users', $datos);
+                echo json_encode($result);
+                die();
+            }
 
-                $id_system_users = url_encode($id_system_users);//Se encripta el parametro enviado
-                redirect('configsys/usuariosForm/'.$id_system_users, 'refresh');
-                /*}else{echo "demo";}*/
+            $sqlExistUser = "SELECT id_system_users FROM system_users WHERE usuario='$usuario' and status=1 limit 1";
+            $respExistU   = $this->db->query($sqlExistUser);
+            if ($respExistU->num_rows() == 1) { #El usuario ya existe
                 $result = [
+                    'success'  => 'false',
+                    'info'     => 'El nombre de usuario:'.$usuario.' ya esta registrado',
+                    'message'  => ''
+                ];
+                echo json_encode($result);
+                die();
+            }
+
+            $dtsP = array('id_persona' => null,
+            'curp' => $curp,
+            'ap_paterno' => $ap_paterno,
+            'ap_materno' => $ap_materno,
+            'nombre' => $nombre);
+            $this->db->insert('persona', $dtsP); 
+            #Obtenemos el ultimo ID
+            $id_persona=$this->db->insert_id(); 
+
+            // echo "<br>Agregar el usuario en la tabla de system_users";
+            $datos = array('id_system_users' => null,
+            'id_persona' => $id_persona,
+            'usuario' => $usuario,
+            'password' => MD5($password),
+            'status'=>1);
+            $this->db->insert('system_users', $datos); 
+            #Obtenemos el ultimo ID
+            $getLastInserted=$this->db->insert_id(); 
+
+            ###PRIVILEGIOS POR MODULO -INICIO
+            $datos = array('id_system_modulos_privilegios' => null,
+            'id_modulo' => 2,
+            'id_user' => $getLastInserted,
+            'status' => 1);
+            $this->db->INSERT('system_modulos_privilegios', $datos); 
+
+            ###PRIVILEGIOS POR SUBMODULO
+            #8 Pagina de bienvenida al usuario
+            $datos = array('id_system_submodulo_privilegios' => null,
+            'id_submodulo' => 8,
+            'id_user' => $getLastInserted,
+            'status' => 1);
+            $this->db->INSERT('system_submodulo_privilegios', $datos);
+            #9 Cambiar clave de acceso
+            $datos = array('id_system_submodulo_privilegios' => null,
+            'id_submodulo' => 9,
+            'id_user' => $getLastInserted,
+            'status' => 1);
+            $this->db->INSERT('system_submodulo_privilegios', $datos);
+            #10 Acceso no autorizado 
+            $datos = array('id_system_submodulo_privilegios' => null,
+            'id_submodulo' => 10,
+            'id_user' => $getLastInserted,
+            'status' => 1);
+            $this->db->INSERT('system_submodulo_privilegios', $datos);
+
+            #$getLastInserted = url_encode($getLastInserted);//Se encripta el parametro enviado
+            #redirect('configsys/usuariosForm/'.$getLastInserted, 'refresh');
+            $result = [
+                'success'  => 'true',
+                'info'     => 'Usuario registrado',
+                'message'  => $getLastInserted
+            ];
+        } else if($action=="edit") {
+
+            $sqlExistUser = "SELECT id_system_users FROM system_users WHERE usuario='$usuario' and status=1 and id_system_users!=$id_system_users";
+            $respExistU   = $this->db->query($sqlExistUser);
+            if ($respExistU->num_rows() == 1) { #El usuario ya existe
+                $result = [
+                    'success'  => 'false',
+                    'info'     => 'Nombre de usuario:'.$usuario.' duplicado',
+                    'message'  => ''
+                ];
+                echo json_encode($result);
+                die();
+            }
+            $dtsp = array('ap_paterno' => $ap_paterno,
+            'ap_materno' => $ap_materno,
+            'nombre'     => $nombre);
+            $this->db->WHERE('id_persona', $id_persona);
+            $this->db->UPDATE('persona', $dtsp);
+
+            $datos = array('status' => $status,
+            'usuario'  => $usuario,
+            'password' => MD5($password));
+            $this->db->WHERE('id_system_users', $id_system_users);
+            $this->db->UPDATE('system_users', $datos);
+
+            $result = [
                 'success'  => 'true',
                 'info'     => 'Usuario actualizado',
                 'message'  => ''

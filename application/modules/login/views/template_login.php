@@ -5,6 +5,6 @@
 $data['titlePage']=$titlePage;
 $data['descTitle']=$descTitle;
 
-$this->load->view('template/head',$data);
+#$this->load->view('template/head',$data);
 $this->load->view($contenidoPrincial,$data);
-$this->load->view('template/footer');
+#$this->load->view('template/footer');

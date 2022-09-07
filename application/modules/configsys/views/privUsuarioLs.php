@@ -33,7 +33,7 @@
                   <td>".$result->nombrecompleto."</td>
                   <td>".$result->usuario."</td>
                   <td align='center'>";
-                    $this->crearelemento->Link("privUsuarioForm/",url_encode($result->id_system_users)."/".url_encode($result->nombrecompleto),"btn btn-info btn-xs","Editar","fa fa-edit");
+                    $this->crearelemento->Link("privUsuarioForm/",url_encode($result->id_system_users)."/".url_encode($result->nombrecompleto),"btn btn-primary btn-xs","Editar","fa fa-edit");
                   echo"</td>
                 </tr>";
                 }

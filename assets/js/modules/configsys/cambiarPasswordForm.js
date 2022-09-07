@@ -1,6 +1,6 @@
 //Validar datos al cambiar usuario y contraseña
-var validaCambiarPass = $("#validaCambiarPass");
 $(document).ready(function() {
+    let validaCambiarPass = $("#validaCambiarPass");
     validaCambiarPass.formValidation({
         framework: 'bootstrap',
         excluded: [':disabled'],

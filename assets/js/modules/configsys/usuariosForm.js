@@ -46,13 +46,15 @@ $(document).ready(function() {
 
 
 let id_system_users = $('#id_system_users');
-let action = $('#action');
-let nombre = $('#nombre');
-let ap_paterno = $('#ap_paterno');
-let ap_materno = $('#ap_materno');
-let curp = $('#curp');
-let usuario = $('#usuario');
-let password = $('#password');
+let id_persona      = $('#id_persona');
+let action          = $('#action');
+let nombre          = $('#nombre');
+let ap_paterno      = $('#ap_paterno');
+let ap_materno      = $('#ap_materno');
+let curp            = $('#curp');
+let usuario         = $('#usuario');
+let password        = $('#password');
+let statusu          = $('#status');
 
 function sendData(){
 
@@ -63,6 +65,7 @@ function sendData(){
 
     let formData = new FormData();
     formData.append('id_system_users',id_system_users.val());
+    formData.append('id_persona',id_persona.val());
     formData.append('action',action.val());
     formData.append('nombre',nombre.val());
     formData.append('ap_paterno',ap_paterno.val());
@@ -70,13 +73,13 @@ function sendData(){
     formData.append('curp',curp.val());
     formData.append('usuario',usuario.val());
     formData.append('password',password.val());
-
+    formData.append('status',statusu.val());
 
     $.ajax({
-        url : 'usuariosAction',
-        type: 'POST',
-        data:formData,
-        cache: false,
+        url        : 'usuariosAction',
+        type       : 'POST',
+        data       : formData,
+        cache      : false,
         contentType: false,
         processData: false,
         beforeSend: function() {

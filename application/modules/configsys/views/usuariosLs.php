@@ -43,7 +43,7 @@
 									<td>".$result->usuario."</td>
 									<td>".$result->status."</td>
 									<td align='center'>";
-									$this->crearelemento->LoadModal("usuariosForm/",url_encode($result->id_system_users),"btn btn-default btn-xs","Editar","fa fa-edit");
+									$this->crearelemento->LoadModal("usuariosForm/",url_encode($result->id_system_users),"btn btn-primary btn-xs","Editar","fa fa-edit");
 									echo"</td>
 								</tr>";
 								}

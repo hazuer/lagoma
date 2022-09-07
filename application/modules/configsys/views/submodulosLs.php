@@ -40,7 +40,7 @@
 										<td>".$result->modulo."</td>
 										<td>".$result->submodulo."</td>
 										<td align='center'>";
-										$this->crearelemento->LoadModal("submoduloForm/",url_encode($result->id_system_submodulo),"btn btn-default btn-xs","Editar","fa fa-edit");
+										$this->crearelemento->LoadModal("submoduloForm/",url_encode($result->id_system_submodulo),"btn btn-primary btn-xs","Editar","fa fa-edit");
 										echo"</td>
 									</tr>";
 								}
