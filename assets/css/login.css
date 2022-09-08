@@ -1,0 +1,220 @@
+.wrapper {
+	background: #50a3a2;
+	background-repeat: no-repeat;
+	background-image: linear-gradient(rgb(83 162 195), rgb(22 64 80));
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	height: 400px;
+	text-align: center;
+}
+
+form {
+	padding: 20px 0;
+	position: relative;
+	z-index: 2;
+}
+
+form input:focus {
+	background-color: white;
+	color: #53e3a6;
+}
+
+.bg-bubbles {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.bg-bubbles li {
+	position: absolute;
+	list-style: none;
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-color: rgba(255, 255, 255, 0.15);
+	bottom: -160px;
+	-webkit-animation: square 25s infinite;
+	animation: square 25s infinite;
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.bg-bubbles li:nth-child(1) {
+  	left: 10%;
+}
+
+.bg-bubbles li:nth-child(2) {
+	left: 20%;
+	width: 80px;
+	height: 80px;
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s;
+	-webkit-animation-duration: 17s;
+	animation-duration: 17s;
+}
+
+.bg-bubbles li:nth-child(3) {
+	left: 25%;
+	-webkit-animation-delay: 4s;
+	animation-delay: 4s;
+}
+
+.bg-bubbles li:nth-child(4) {
+	left: 40%;
+	width: 60px;
+	height: 60px;
+	-webkit-animation-duration: 22s;
+	animation-duration: 22s;
+	background-color: rgba(255, 255, 255, 0.25);
+}
+
+.bg-bubbles li:nth-child(5) {
+  	left: 70%;
+}
+
+.bg-bubbles li:nth-child(6) {
+	left: 80%;
+	width: 120px;
+	height: 120px;
+	-webkit-animation-delay: 3s;
+	animation-delay: 3s;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bg-bubbles li:nth-child(7) {
+	left: 32%;
+	width: 160px;
+	height: 160px;
+	-webkit-animation-delay: 7s;
+	animation-delay: 7s;
+}
+
+.bg-bubbles li:nth-child(8) {
+	left: 55%;
+	width: 20px;
+	height: 20px;
+	-webkit-animation-delay: 15s;
+	animation-delay: 15s;
+	-webkit-animation-duration: 40s;
+	animation-duration: 40s;
+}
+
+.bg-bubbles li:nth-child(9) {
+	left: 25%;
+	width: 10px;
+	height: 10px;
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s;
+	-webkit-animation-duration: 40s;
+	animation-duration: 40s;
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bg-bubbles li:nth-child(10) {
+	left: 90%;
+	width: 160px;
+	height: 160px;
+	-webkit-animation-delay: 11s;
+	animation-delay: 11s;
+}
+
+@-webkit-keyframes square {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-700px) rotate(600deg);
+    transform: translateY(-700px) rotate(600deg);
+  }
+}
+@keyframes square {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-700px) rotate(600deg);
+    transform: translateY(-700px) rotate(600deg);
+  }
+}
+
+.card-container.card {
+	width: 350px;
+	padding: 40px 40px;
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/*
+ * Card component
+ */
+.card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 100%;
+    height: 85px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+
+
+.form-signin #inputPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px;
+}
+
+.btn-signin {
+    background-color: rgb(89 133 153);
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+}
+
+.btn-signin:hover,
+.btn-signin:active,
+.btn-signin:focus {
+    background-color: rgb(25 82 106);
+}

@@ -325,8 +325,8 @@ CREATE TABLE `system_modulos` (
 
 INSERT INTO `system_modulos` (`id_system_modulos`, `modulo`, `desc_modulo`, `urlControlador`, `icono`, `classColor`) VALUES
 (1, 'Config.', 'Configuración global del sistema', 'configsys', 'fa fa-gears icon', 'primary dker'),
-(2, 'Inicio', 'Inicio', 'inicio', 'fa fa-usd icon', 'bg-info'),
-(3, 'Ventas', 'Ventas de Mostrador', 'ventas', 'fa fa-list icon', 'bg-primary'),
+(2, 'Inicio', 'Inicio', 'inicio', 'fa fa-home icon', 'bg-info'),
+(3, 'Ventas', 'Ventas de Mostrador', 'ventas', 'fa fa-usd icon', 'bg-primary'),
 (4, 'Inventario', 'Control de Inventario', 'inventario', 'fa fa-list icon', 'bg-primary');
 
 -- --------------------------------------------------------

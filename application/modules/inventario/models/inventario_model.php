@@ -31,7 +31,7 @@ Class Inventario_model extends CI_Model
   function get_Inventario()
   {
    $sql="SELECT
-    inventario.idInventario,
+    inventario.idinventario,
     inventario.cantidad,
     inventario.articulo,
     inventario.precioNeto,
