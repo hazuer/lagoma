@@ -57,7 +57,7 @@ table {
 						</div>
 						<div class="col-sm-1">
 							<label>Agregar</label>
-							<button id="clone" name="clone" class="btn btn-success btn-xs" title="Agregar">
+							<button id="addProduct" name="addProduct" class="btn btn-success btn-xs" title="Agregar">
 								<i class="fa fa-plus"></i>
 							</button>
 						</div>
@@ -81,55 +81,10 @@ table {
 		</div><!--/row-->
 
 		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Cantidad</th>
-					<th>Codigo</th>
-					<th>Descripcion</th>
-					<th>P.U.</th>
-					<th>Importe</th>
-					<th style="text-align: center; width:10%;">
-						<button id="clone" name="clone" class="btn btn-warning btn-xs" title="Clone selected products">
-							<i class="fa fa-eraser"></i>
-						</button>
-						<button id="delete" name="delete" type="button" class="btn btn-danger btn-xs" title="Delete selected products">
-							<i class="fa fa-trash-o"></i>
-						</button>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-					<td>Lapiz</td>
-					<td>$0.00</td>
-					<td>$0.00</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-					<td>Goma</td>
-					<td>$0.00</td>
-					<td>$0.00</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-					<td>Torta de jamon</td>
-					<td>$0.00</td>
-					<td>$0.00</td>
-					<td></td>
-				</tr>
-			</tbody>
 		</table>
 
     </section>
   </section>
 </section>
+
+

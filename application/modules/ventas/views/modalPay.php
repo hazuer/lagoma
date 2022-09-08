@@ -8,7 +8,7 @@ $titleBtn = "Cobrar";
 				<button type="button" class="close" data-dismiss="modal">×</button> 
 				<h4 class="modal-title">Pago en Efectivo</h4>
 			</div>
-			<form class="form-horizontal" id="validaUsuarios" onsubmit="return false">
+			<form class="form-horizontal" id="validaPago" onsubmit="return false">
 				<div class="modal-body">
 				<div class="row">
 				<div class="col-sm-1"></div>
@@ -16,15 +16,35 @@ $titleBtn = "Cobrar";
 					<div class="form-group">
 						<div class="col-sm-4">
 							<label>Total:</label>
-							<input type="text" class="form-control parsley-validated" readonly data-required="true" value="$30.00">
+							<?php
+							$atribInput = [
+							"type"  => "text",
+							"id"    => "password",
+							"name"  => "password",
+							"disabled"  => "disabled",
+							"class" => "form-control"];
+							$this->crearelemento->Input($atribInput);?>
 						</div>
 						<div class="col-sm-4">
-							<label>Efectivo:</label>
-							<input type="text" class="form-control parsley-validated" data-required="true">
+							<label>*Efectivo:</label>
+							<?php
+							$atribInput = [
+							"type"  => "text",
+							"id"    => "efectivo",
+							"name"  => "efectivo",
+							"class" => "form-control"];
+							$this->crearelemento->Input($atribInput);?>
 						</div>
 						<div class="col-sm-4">
 							<label>Cambio:</label>
-							<input type="text" class="form-control parsley-validated" readonly data-required="true" value="$10.00">
+							<?php
+							$atribInput = [
+							"type"  => "text",
+							"id"    => "password",
+							"name"  => "password",
+							"disabled"  => "disabled",
+							"class" => "form-control"];
+							$this->crearelemento->Input($atribInput);?>
 						</div>
 					</div>
 					<div class="form-group">
@@ -54,7 +74,7 @@ $titleBtn = "Cobrar";
 							"name"    => "guardar",
 							"value"   => "guardar",
 							"class"   => "btn btn-primary",
-							"onclick" => "sendData()",
+							"onclick" => "pay()",
 						];
 						$this->crearelemento->Button($atribButton, $titleBtn, "fa fa-usd");
 					?>
@@ -64,3 +84,8 @@ $titleBtn = "Cobrar";
 		</div>
 	</div>
 </div>
+
+<script src="<?php echo base_url(); ?>assets/js/jquery-3.6.1.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/modules/ventas/ventasModal.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/formvalidator/formvalidation-bootstrap.min.js"></script>
