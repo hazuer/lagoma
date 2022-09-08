@@ -28,5 +28,13 @@ class Ventas extends MX_Controller  {
         $this->load->view('main_template',$this->data);
     }
 
+    function modal_pay() {
+        #Se incluye el helper para validacion de modulos y submodulos
+        $this->data['idSubModule'] = 11;
+        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
+
+        $this->load->view('ventas/modalPay', $this->data);
+    }
+
 }
 ?>
