@@ -37,23 +37,27 @@ table {
 					<div class="panel-body">
 						<div class="col-sm-1">
 							<label>Cantidad</label>
-							<input type="text" class="form-controlv parsley-validated" data-required="true">
+							<input id="cantidad" name="cantidad" type="text" class="form-controlv" value="1">
 						</div>
 						<div class="col-sm-3">
 							<label>Codigo</label>
-							<input type="text" class="form-controlv parsley-validated" data-required="true">
+							<input id="codigo" name="codigo" type="text" class="form-controlv" autofocus>
+							<ul class="dropdown-menu txtCodigo" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCodigo"></ul>
 						</div>
 						<div class="col-sm-5">
 							<label>Descripcion</label>
-							<input type="text" class="form-controlv parsley-validated" data-required="true">
+							<input id="descipcion" name="descipcion" type="text" class="form-controlv">
+							<ul class="dropdown-menu txtDescripcion" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownDescripcion"></ul>
 						</div>
 						<div class="col-sm-1">
 							<label>Precio U.</label>
-							<label>$6.0</label>
+							<label id="lpreciou">$6.0</label>
+							<input id="pu" name="pu" type="text" class="form-controlv">
 						</div>
 						<div class="col-sm-1">
 							<label>Importe</label>
-							<label>$12.0</label>
+							<label id="limporte">$12.0</label>
+							<input id="importe" name="importe" type="text" class="form-controlv">
 						</div>
 						<div class="col-sm-1">
 							<label>Agregar</label>
@@ -73,7 +77,7 @@ table {
 					<div class="panel-body">
 						<div class="col-sm-9" style="text-align: right;">
 							<label><b>TOTAL</b></label>
-							<a class="btn btn-primary btn-xs" href="ventas/modal_pay" data-toggle="ajaxModal"> <i class="fa fa-usd"></i> 0.00</a>
+							<a class="btn btn-primary btn-xs" href="ventas/modal_pay" data-toggle="ajaxModal"> <i class="fa fa-usd"></i> <span id="totalg">0.00</span></a>
 						</div>
 					</div>
 				</section>
@@ -81,6 +85,12 @@ table {
 		</div><!--/row-->
 
 		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%">
+		<thead><th>a</th>
+		<th>b</th>
+		<th>b</th>
+		<th>b</th>
+		<th>d</th><th>opc</th>
+		</thead>
 		</table>
 
     </section>

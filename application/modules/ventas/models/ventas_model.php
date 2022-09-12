@@ -14,5 +14,27 @@ Class Ventas_model extends CI_Model {
         }
         return false;
     }
+
+    public function GetRow($keyword) {        
+        #$this->db->order_by('id', 'DESC');
+        #$this->db->like("articulo", $keyword);
+       # var_dump($this->db);
+       $sqlExistPerson = "SELECT idInventario, articulo, precioNeto FROM inventario WHERE articulo like'%$keyword%' LIMIT 10";
+            $respExistP     = $this->db->query($sqlExistPerson);
+       # return $this->db->get('inventario');
+       return $respExistP->result();
+    }
+
+    public function getCode($code) {        
+        #$this->db->order_by('id', 'DESC');
+        #$this->db->like("articulo", $code);
+       # var_dump($this->db);
+       $sqlExistPerson = "SELECT idInventario, articulo, precioNeto FROM inventario WHERE idInventario =$code LIMIT 10";
+            $respExistP     = $this->db->query($sqlExistPerson);
+       # return $this->db->get('inventario');
+       return $respExistP->result();
+    }
+
+
 }
 ?>

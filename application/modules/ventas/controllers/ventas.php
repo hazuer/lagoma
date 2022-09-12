@@ -36,5 +36,18 @@ class Ventas extends MX_Controller  {
         $this->load->view('ventas/modalPay', $this->data);
     }
 
+    public function GetCountryName(){
+        $keyword=$this->input->post('keyword');
+        $data=$this->ventas_model->GetRow($keyword);        
+        echo json_encode($data);
+    }
+
+    
+    public function getCodeB(){
+        $keyword=$this->input->post('keyword');
+        $data=$this->ventas_model->getCode($keyword);        
+        echo json_encode($data);
+    }
+
 }
 ?>
