@@ -35,101 +35,99 @@ let totalG = '';
 			'order': [[1, 'asc']]
 			});
 		//});
+		let addProduct     = $('#addProduct');
+		let cantidad       = $('#cantidad');
+		let codigo         = $('#codigo');
+		let description    = $('#description');
+		let precioUnitario = $('#precioUnitario');
+		let importe        = $('#importe');
+		let spTotal          = $('#spTotal').html('0.00 MXN');
+		let dataP = [];
+
+		addProduct.click(function(e){
+			let element = {};
+			element.cantidad = cantidad.val();
+			element.codigo = codigo.val();
+			element.description = description.val();
+			element.pu = precioUnitario.val();
+			element.importe = importe.val();
+			dataP.push(element);
+			//console.log(dataP);
+			dataPG=dataP;
+
+			let tblElemets = '';
+
+			//$('#tbl-product').dataTable().clear().draw();
+			//$('#tbl-product').DataTable();
+			oTable.clear().draw();
+
+			$('#tbl-product_wrapper').show();
+			let t = parseFloat(0);
+			dataP.forEach(element => {
+				tblElemets += '<tr>';
+				tblElemets += '<td>' + element.cantidad + '</td>';
+				tblElemets += '<td>' + element.codigo + '</td>';
+				tblElemets += '<td>' + element.description + '</td>';
+				tblElemets += '<td>' + element.pu + '</td>';
+				tblElemets += '<td>' + element.importe + '</td>';
+				tblElemets += '<td> </td>';
+				tblElemets += '</tr>';
+				t=parseFloat(t+(element.cantidad*element.pu));
+			});
+			spTotal.html(t.toLocaleString("es", {
+				style: "currency",
+				currency: "MXN"
+			}));
+			$('#total').val(t);
+			
 	
-		
-	let dataP = [];
-    
-    let addProduct =$("#addProduct");
-
-	let cantidad =$('#cantidad');
-	let codigo =$('#codigo');
-	let descipcion =$('#descipcion');
-	let pu =$('#pu');
-	let importe =$('#importe');
-
-    addProduct.click(function(e){
-		let element = {};
-		console.log('addProduct');
-        element.cantidad = cantidad.val();
-        element.codigo = codigo.val();
-        element.descipcion = descipcion.val();
-        element.pu = pu.val();
-        element.importe = importe.val();
-        dataP.push(element);
-        console.log(dataP);
-        dataPG=dataP;
-
-
-		totalG = parseFloat(totalG) + parseFloat(element.importe);
-		console.log(totalG);
-		$("#totalg").html(totalG);
-
-		let tblElemets = '';
+			//$('#tbl-product tbody').parents('tbody').empty();
+			$('.odd').hide();
+			$('#tbl-product tbody').append(tblElemets);
 	
-		//$('#tbl-product').dataTable().clear().draw();
-		//$('#tbl-product').DataTable();
-		console.log(oTable);
-		oTable.clear().draw();
-		
-		$('#tbl-product_wrapper').show();
-		dataP.forEach(element => {
-			console.log(element);
-            tblElemets += '<tr>';
-            tblElemets += '<td>' + element.cantidad + '</td>';
-            tblElemets += '<td>' + element.codigo + '</td>';
-            tblElemets += '<td>' + element.descipcion + '</td>';
-            tblElemets += '<td>' + element.pu + '</td>';
-            tblElemets += '<td>' + element.importe + '</td>';
-			tblElemets += '<td> </td>';
-            tblElemets += '</tr>';
+			//reset form add
+			cantidad.val('1');
+			codigo.val('');
+			codigo.focus();
+			description.val('');
+			precioUnitario.val('');
+			importe.val('');
 		});
 
-		//$('#tbl-product tbody').parents('tbody').empty();
-		$('.odd').hide();
-		$('#tbl-product tbody').append(tblElemets);
-
-		//reset form add
-		cantidad.val('1');
-		codigo.val('');
-		codigo.focus();
-		descipcion.val('');
-		pu.val('');
-		importe.val('');
-	});
-
-    const showSwal = () => {
-        swal({
-            title            : "Procesando...",
-            text             : "Espere por favor",
-            icon             : "../assets/images/ajax-loader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false
-        });
-    }
+		
 	});
 }(window.jQuery);
 
 
 $(document).ready(function() {
+
+	let lbPrecioUnitario = $('#lbPrecioUnitario').html('$0.00');
+	let lbImporte        = $('#lbImporte').html('$0.00');
+	
 	$('#tbl-product_wrapper').hide();
     $('.odd').hide();
 
-	$("#descipcion").keyup(function () {
+	let cantidad       = $('#cantidad');
+	let codigo         = $('#codigo');
+	let description    = $('#description');
+	let precioUnitario = $('#precioUnitario');
+	let importe        = $('#importe');
+	description.keyup(function () {
         $.ajax({
             type: "POST",
             url: "ventas/GetCountryName",
             data: {
-                keyword: $("#descipcion").val()
+                keyword: description.val()
             },
             dataType: "json",
             success: function (data) {
                 if (data.length > 0) {
                     $('#DropdownDescripcion').empty();
-                    $('#descipcion').attr("data-toggle", "dropdown");
+                    description.attr("data-toggle", "dropdown");
                     $('#DropdownDescripcion').dropdown('toggle');
                 }
                 else if (data.length == 0) {
-                    $('#descipcion').attr("data-toggle", "");
+                    description.attr("data-toggle", "");
                 }
                 $.each(data, function (key,value) {
                     if (data.length >= 0)
@@ -138,16 +136,14 @@ $(document).ready(function() {
             }
         });
     });
+
     $('ul.txtDescripcion').on('click', 'li a', function () {
-        $('#descipcion').val($(this).text());
-		$('#codigo').val($(this).data("idinventario"));
-		$('#pu').val($(this).data("precioneto"));
-		let c = $('#cantidad').val();
-		let pu= $(this).data("precioneto");
-		let importe = c*pu;
-		$('#lpreciou').html(pu);
-		$('#limporte').html(importe);
-		$('#importe').val(importe);
+		let cant = parseFloat(cantidad.val());
+		let cod= $(this).data("idinventario");
+        let desc=$(this).text();
+		let pu = parseFloat($(this).data("precioneto"));
+
+		fillClicProduct(cant,cod,desc,pu);
 		
     });
 
@@ -162,11 +158,11 @@ $(document).ready(function() {
             success: function (data) {
                 if (data.length > 0) {
                     $('#DropdownCodigo').empty();
-                    $('#codigo').attr("data-toggle", "dropdown");
+                    codigo.attr("data-toggle", "dropdown");
                     $('#DropdownCodigo').dropdown('toggle');
                 }
                 else if (data.length == 0) {
-                    $('#codigo').attr("data-toggle", "");
+                    codigo.attr("data-toggle", "");
                 }
                 $.each(data, function (key,value) {
                     if (data.length >= 0)
@@ -176,18 +172,56 @@ $(document).ready(function() {
         });
     });
     $('ul.txtCodigo').on('click', 'li a', function () {
-        $('#codigo').val($(this).text());
-		console.log($(this).data("articulo"));
-		console.log($(this).data("precioneto"));
-		$('#descipcion').val($(this).data("articulo"));
-		$('#pu').val($(this).data("precioneto"));
-		let c = $('#cantidad').val();
-		let pu= $(this).data("precioneto");
-		let importe = c*pu;
-		$('#lpreciou').html(pu);
-		$('#limporte').html(importe);
-		$('#importe').val(importe);
+		let cant = parseFloat(cantidad.val());
+        let cod  = $(this).text();
+		let desc = $(this).data("articulo");
+		let pu   = parseFloat($(this).data("precioneto"));
+
+		fillClicProduct(cant,cod,desc,pu);
     });
 
+	function fillClicProduct(cant, cod, desc, pu){
+		let imp = parseFloat(cant*pu);
+		codigo.val(cod);
+		description.val(desc);
+		//let c = parseFloat(cantidad.val());
+		//let pu = parseFloat($(this).data("precioneto"));
+		precioUnitario.val(pu);
+		importe.val(imp);
+		
+		lbPrecioUnitario.html(pu);
+		lbImporte.html(imp);
+	}
+
+	
+	$('#btn-modal').click(function(e){
+		console.log('cccc');
+		let amount = $('#amount');
+		console.log($('#total').val());
+		amount.val($('#total').val());
+	});
+
+	$('#btn-pay').click(function(e){
+		let efectivo = $('#efectivo');
+	
+		if( efectivo.val()==''){
+			swal("Attention!", "Required fields (*)", "warning");
+			return false;
+		}
+	
+		console.log('continue');
+		console.log(dataPG);
+	 
+	});
+	
+	const showSwal = () => {
+		swal({
+			title            : "Procesando...",
+			text             : "Espere por favor",
+			icon             : "../assets/images/ajax-loader.gif",
+			showConfirmButton: false,
+			allowOutsideClick: false
+		});
+	}
 });
 
