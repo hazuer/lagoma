@@ -7,26 +7,21 @@ let oTable ='';
 let dataPG =[];
 let totalG = '';
 +function ($) { "use strict";
-//let oTable ='';
 	$(function(){
-		//$('#tbl-product').each(function() {
 		oTable = $('#tbl-product').DataTable({
 			"dom": '<"top"f>rt<"bottom"pi><"clear">',
 			"scrollCollapse": false,
 			"paging": false,
 			"scrollX": false,
 			"columns" : [
-				{title: `cantidad`, name      : `id`, data           : `id`},
-				{title: `codigo`, name    : `name`, data         : `name`},
-				{title: `descipcion`, name : `content`, data      : `content`},
-				{title: `pu`, name    : `type_business`, data: `type_business`},
-				{title: `importe`, name: `pdate`, data        : `pdate`},
-				//{title: `Unp date`, name: `udate`, data        : `udate`},
-				//{title: `Shared`, name: `slink`, data: `slink`}
+				{title: `Cantidad`, name      : `id`, data           : `id`},
+				{title: `Codigo`, name    : `name`, data         : `name`},
+				{title: `Description`, name : `content`, data      : `content`},
+				{title: `Precio Unitario`, name    : `type_business`, data: `type_business`},
+				{title: `Importe`, name: `pdate`, data        : `pdate`},
 			],
 			"columnDefs": [
 				{"orderable": false,'targets': 0,'checkboxes': {'selectRow': true}},
-				//{ "targets": [3,4,5,6], visible   : false, searchable: false, orderable: false},
 				{ "orderable": false,"targets": 5 }
 			],
 			'select': {
@@ -34,14 +29,15 @@ let totalG = '';
 			},
 			'order': [[1, 'asc']]
 			});
-		//});
 		let addProduct     = $('#addProduct');
 		let cantidad       = $('#cantidad');
 		let codigo         = $('#codigo');
 		let description    = $('#description');
 		let precioUnitario = $('#precioUnitario');
 		let importe        = $('#importe');
-		let spTotal          = $('#spTotal').html('0.00 MXN');
+		let lbPrecioUnitario = $('#lbPrecioUnitario');
+		let lbImporte      = $('#lbImporte');
+		let lbTotal        = $('#lbTotal').html('0.00');
 		let dataP = [];
 
 		addProduct.click(function(e){
@@ -57,8 +53,6 @@ let totalG = '';
 
 			let tblElemets = '';
 
-			//$('#tbl-product').dataTable().clear().draw();
-			//$('#tbl-product').DataTable();
 			oTable.clear().draw();
 
 			$('#tbl-product_wrapper').show();
@@ -68,23 +62,18 @@ let totalG = '';
 				tblElemets += '<td>' + element.cantidad + '</td>';
 				tblElemets += '<td>' + element.codigo + '</td>';
 				tblElemets += '<td>' + element.description + '</td>';
-				tblElemets += '<td>' + element.pu + '</td>';
-				tblElemets += '<td>' + element.importe + '</td>';
+				tblElemets += '<td>' + '$'+Number(element.pu).toFixed(2) + '</td>';
+				tblElemets += '<td>' + '$'+Number((element.cantidad*element.pu)).toFixed(2)+ '</td>';
 				tblElemets += '<td> </td>';
 				tblElemets += '</tr>';
 				t=parseFloat(t+(element.cantidad*element.pu));
 			});
-			spTotal.html(t.toLocaleString("es", {
-				style: "currency",
-				currency: "MXN"
-			}));
+			lbTotal.html(Number(t).toFixed(2));
 			$('#total').val(t);
-			
-	
-			//$('#tbl-product tbody').parents('tbody').empty();
+
 			$('.odd').hide();
 			$('#tbl-product tbody').append(tblElemets);
-	
+
 			//reset form add
 			cantidad.val('1');
 			codigo.val('');
@@ -92,9 +81,10 @@ let totalG = '';
 			description.val('');
 			precioUnitario.val('');
 			importe.val('');
+			lbPrecioUnitario.html('$0.00');
+			lbImporte.html('$0.00');
 		});
 
-		
 	});
 }(window.jQuery);
 
@@ -103,7 +93,7 @@ $(document).ready(function() {
 
 	let lbPrecioUnitario = $('#lbPrecioUnitario').html('$0.00');
 	let lbImporte        = $('#lbImporte').html('$0.00');
-	
+
 	$('#tbl-product_wrapper').hide();
     $('.odd').hide();
 
@@ -142,9 +132,7 @@ $(document).ready(function() {
 		let cod= $(this).data("idinventario");
         let desc=$(this).text();
 		let pu = parseFloat($(this).data("precioneto"));
-
 		fillClicProduct(cant,cod,desc,pu);
-		
     });
 
 	$("#codigo").keyup(function () {
@@ -171,6 +159,7 @@ $(document).ready(function() {
             }
         });
     });
+
     $('ul.txtCodigo').on('click', 'li a', function () {
 		let cant = parseFloat(cantidad.val());
         let cod  = $(this).text();
@@ -184,36 +173,47 @@ $(document).ready(function() {
 		let imp = parseFloat(cant*pu);
 		codigo.val(cod);
 		description.val(desc);
-		//let c = parseFloat(cantidad.val());
-		//let pu = parseFloat($(this).data("precioneto"));
 		precioUnitario.val(pu);
 		importe.val(imp);
-		
-		lbPrecioUnitario.html(pu);
-		lbImporte.html(imp);
+
+		lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
+		lbImporte.html('$'+Number(imp).toFixed(2));
 	}
 
-	
 	$('#btn-modal').click(function(e){
-		console.log('cccc');
-		let amount = $('#amount');
+		$('#efectivo').val('');
+		$('#nota').val('');
+		$('#lbCambio').html('$0.00');
+		let lbMTotal = $('#lbMTotal');
+		lbMTotal.html('$'+Number($('#total').val()).toFixed(2));
 		console.log($('#total').val());
-		amount.val($('#total').val());
+		$('#mTotal').val(Number($('#total').val()).toFixed(2));
+	});
+
+	$('#efectivo').keyup(function(e){
+		console.log('here press');
+		console.log($(this).val());
+		let mt=$('#mTotal').val();
+		let cap = $(this).val();
+		let cambio = parseFloat(cap-mt);
+		console.log(cambio);
+		$('#lbCambio').html('$'+Number(cambio).toFixed(2));
 	});
 
 	$('#btn-pay').click(function(e){
 		let efectivo = $('#efectivo');
-	
+
 		if( efectivo.val()==''){
 			swal("Attention!", "Required fields (*)", "warning");
 			return false;
 		}
-	
+
+		swal("Gracias por su compra", "Su cambio $23.00 \n Regrese pronto", "success");
 		console.log('continue');
 		console.log(dataPG);
-	 
+
 	});
-	
+
 	const showSwal = () => {
 		swal({
 			title            : "Procesando...",

@@ -78,10 +78,10 @@ table {
 					<div class="panel-body">
 						<div class="col-sm-9" style="text-align: right;">
 							<label><b>TOTAL</b></label>
-							<!-- <a class="btn btn-primary btn-xs" href="ventas/modal_pay" data-toggle="ajaxModal"> <i class="fa fa-usd"></i> <span id="spTotal"></span></a> -->
+							<!-- <a class="btn btn-primary btn-xs" href="ventas/modal_pay" data-toggle="ajaxModal"> <i class="fa fa-usd"></i> <span id="lbTotal"></span></a> -->
 							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal" id="btn-modal">
-							<i class="fa fa-usd"></i> <span id="spTotal"></span></button>
-							<input id="total" name="total" type="text" class="form-controlv" 
+							<i class="fa fa-usd"></i><b><span id="lbTotal"></span></b></button>
+							<input id="total" name="total" type="text" class="form-controlv">
 						</div>
 					</div>
 				</section>
@@ -103,7 +103,7 @@ table {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h3 class="modal-title" id="exampleModalLabel">Realizar cobro</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -116,57 +116,60 @@ table {
 				<div class="col-sm-1"></div>
 					<div class="col-sm-10">
 					<div class="form-group">
-						<div class="col-sm-4">
-							<label>Total:</label>
-							<?php
-							$atribInput = [
-							"type"  => "text",
-							"id"    => "amount",
-							"name"  => "amount",
-							"disabled"  => "disabled",
-							"class" => "form-control"];
-							$this->crearelemento->Input($atribInput);?>
+						<div class="row">
+							<div class="col-sm-9" style="text-align:right;">
+								<h4><label>Total:</label></h4>
+							</div>
+							<div class="col-sm-3" style="text-align:right;">
+								<h4><label id="lbMTotal">$0.00</label></h4>
+								<input id="mTotal" name="mTotal" type="text" value="">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<label>*Efectivo:</label>
-							<?php
-							$atribInput = [
-							"type"  => "text",
-							"id"    => "efectivo",
-							"name"  => "efectivo",
-							"class" => "form-control"];
-							$this->crearelemento->Input($atribInput);?>
+						<div class="row">
+							<div class="col-sm-9" style="text-align:right;">
+								<h5><label>*Efectivo:</label></h5>
+							</div>
+							<div class="col-sm-3">
+								<?php
+								$atribInput = [
+								"type"  => "text",
+								"id"    => "efectivo",
+								"name"  => "efectivo",
+								"class" => "form-control"];
+								$this->crearelemento->Input($atribInput);?>
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<label>Cambio:</label>
-							<?php
-							$atribInput = [
-							"type"  => "text",
-							"id"    => "password",
-							"name"  => "password",
-							"disabled"  => "disabled",
-							"class" => "form-control"];
-							$this->crearelemento->Input($atribInput);?>
+						<div class="row">
+							<div class="col-sm-9" style="text-align:right;">
+								<h5><label>Cambio:</label></h5>
+							</div>
+							<div class="col-sm-3" style="text-align:right;">
+								<h5><label id="lbCambio">$0.00</label></h5>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Nota:</label>
-						<div class="col-md-10">
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Nota:</label>
+						</div>
+						<div class="col-sm-10">
 						<?php
 							$atribTextarea = [
-								"id"    => "desc_modulo",
-								"name"  => "desc_modulo",
+								"id"    => "nota",
+								"name"  => "nota",
 								"class" => "form-control",
 								"rows"  => 2
 							];
-							$this->crearelemento->Textarea($atribTextarea,$desc_modulo);
+							$this->crearelemento->Textarea($atribTextarea,"");
 							?>
+						</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-1"></div>
 					</div>
-						
+
 				</div>
 	  <div class="modal-footer">
 					<?php
