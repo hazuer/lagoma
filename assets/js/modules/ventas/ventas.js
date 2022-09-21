@@ -41,6 +41,10 @@ let totalG = '';
 		let dataP = [];
 
 		addProduct.click(function(e){
+			if(cantidad.val()=='' || codigo.val()=='' || description.val()=='' || precioUnitario.val()=='' || importe.val()==''){
+				swal("Attention!", "Debes agregar o seleccionar un producto del inventario", "warning");
+				return false;
+			}
 			let element = {};
 			element.cantidad = cantidad.val();
 			element.codigo = codigo.val();
@@ -48,7 +52,6 @@ let totalG = '';
 			element.pu = precioUnitario.val();
 			element.importe = importe.val();
 			dataP.push(element);
-			//console.log(dataP);
 			dataPG=dataP;
 
 			let tblElemets = '';
@@ -69,7 +72,7 @@ let totalG = '';
 				t=parseFloat(t+(element.cantidad*element.pu));
 			});
 			lbTotal.html(Number(t).toFixed(2));
-			$('#total').val(t);
+			$('#total-show').val(t);
 
 			$('.odd').hide();
 			$('#tbl-product tbody').append(tblElemets);
@@ -86,6 +89,7 @@ let totalG = '';
 		});
 
 	});
+	
 }(window.jQuery);
 
 
@@ -126,6 +130,52 @@ $(document).ready(function() {
             }
         });
     });
+
+
+	$("#description").change(function () {
+		precioUnitario.val('');
+		importe.val('');
+		lbPrecioUnitario.html('$0.00');
+		lbImporte.html('$0.00');
+	});
+	$("#codigo").change(function () {
+		precioUnitario.val('');
+		importe.val('');
+		lbPrecioUnitario.html('$0.00');
+		lbImporte.html('$0.00');
+	});
+
+	$("#cantidad").keyup(function () {
+		if($(this).val()==0){
+			$("#cantidad").val(1);
+		}
+
+		if(precioUnitario.val()!='' && importe.val()!=''){
+			console.log('recalcular keyup');
+			let cant = parseFloat(cantidad.val());
+			let pu = parseFloat(precioUnitario.val());
+			let imp = parseFloat(cant*pu);
+			importe.val(imp);
+			lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
+			lbImporte.html('$'+Number(imp).toFixed(2));
+		}
+	});
+
+	$("#cantidad").change(function () {
+		if($(this).val()==0){
+			$("#cantidad").val(1);
+		}
+
+		if(precioUnitario.val()!='' && importe.val()!=''){
+			console.log('recalcular change');
+			let cant = parseFloat(cantidad.val());
+			let pu = parseFloat(precioUnitario.val());
+			let imp = parseFloat(cant*pu);
+			importe.val(imp);
+			lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
+			lbImporte.html('$'+Number(imp).toFixed(2));
+		}
+	});
 
     $('ul.txtDescripcion').on('click', 'li a', function () {
 		let cant = parseFloat(cantidad.val());
@@ -180,39 +230,79 @@ $(document).ready(function() {
 		lbImporte.html('$'+Number(imp).toFixed(2));
 	}
 
-	$('#btn-modal').click(function(e){
+	$('#btn-modal-cobro').click(function(e){
+		console.log('total',$('#total-show').val());
+		if($('#total-show').val()==''){
+			swal("Attention!", "No es posible efectuar el cobro por $0.00 pesos", "warning");
+			return false;
+		}
 		$('#efectivo').val('');
 		$('#nota').val('');
 		$('#lbCambio').html('$0.00');
+		$('#cambio').val('');
 		let lbMTotal = $('#lbMTotal');
-		lbMTotal.html('$'+Number($('#total').val()).toFixed(2));
-		console.log($('#total').val());
-		$('#mTotal').val(Number($('#total').val()).toFixed(2));
+		lbMTotal.html('$'+Number($('#total-show').val()).toFixed(2));
+		$('#mTotal').val(Number($('#total-show').val()).toFixed(2));
+		setTimeout(() => {
+			$('#efectivo').focus();
+		}, "500");
 	});
 
 	$('#efectivo').keyup(function(e){
-		console.log('here press');
+		console.log('here press key up');
 		console.log($(this).val());
 		let mt=$('#mTotal').val();
 		let cap = $(this).val();
+		if(cap==''){
+			$('#lbCambio').html('$0.00');
+			return false;
+		}
 		let cambio = parseFloat(cap-mt);
 		console.log(cambio);
 		$('#lbCambio').html('$'+Number(cambio).toFixed(2));
+		$('#cambio').val(Number(cambio).toFixed(2));
+	});
+	$('#efectivo').change(function(e){
+		console.log('here change');
+		console.log($(this).val());
+		let mt=$('#mTotal').val();
+		let cap = $(this).val();
+		if(cap==''){
+			$('#lbCambio').html('$0.00');
+			return false;
+		}
+		let cambio = parseFloat(cap-mt);
+		console.log(cambio);
+		$('#lbCambio').html('$'+Number(cambio).toFixed(2));
+		$('#cambio').val(Number(cambio).toFixed(2));
 	});
 
 	$('#btn-pay').click(function(e){
 		let efectivo = $('#efectivo');
+		let cambio = $('#cambio');
 
 		if( efectivo.val()==''){
-			swal("Attention!", "Required fields (*)", "warning");
+			swal("Attention!", "Ingresa el efectivo", "warning");
 			return false;
 		}
 
-		swal("Gracias por su compra", "Su cambio $23.00 \n Regrese pronto", "success");
+		let p = Math.sign(cambio.val());
+		console.log(p);
+		if( p==-1){
+			swal("Attention!", "Pago incompleto, favor de verificar", "warning");
+			return false;
+		}
+		let msjCambio='Regrese pronto';
+		if($('#cambio').val()!='0.00'){
+			msjCambio="Su cambio $"+cambio.val()+" \n Regrese pronto";
+		}
+
+		swal("Gracias por su compra",msjCambio, "success");
 		console.log('continue');
 		console.log(dataPG);
 
 	});
+	
 
 	const showSwal = () => {
 		swal({
@@ -223,5 +313,6 @@ $(document).ready(function() {
 			allowOutsideClick: false
 		});
 	}
+
 });
 

@@ -38,7 +38,7 @@ table {
 					<div class="panel-body">
 						<div class="col-sm-1">
 							<label>Cantidad</label>
-							<input id="cantidad" name="cantidad" type="text" class="form-controlv" value="1">
+							<input id="cantidad" name="cantidad" type="number" class="form-controlv" min="1" max="999" value="1">
 						</div>
 						<div class="col-sm-3">
 							<label>Codigo</label>
@@ -53,12 +53,12 @@ table {
 						<div class="col-sm-1">
 							<label>Precio U.</label>
 							<label id="lbPrecioUnitario"></label>
-							<input id="precioUnitario" name="precioUnitario" type="text" class="form-controlv" value="">
+							<input id="precioUnitario" name="precioUnitario" type="hidden" class="form-controlv" value="">
 						</div>
 						<div class="col-sm-1">
 							<label>Importe</label>
 							<label id="lbImporte"></label>
-							<input id="importe" name="importe" type="text" class="form-controlv" value="">
+							<input id="importe" name="importe" type="hidden" class="form-controlv" value="">
 						</div>
 						<div class="col-sm-1">
 							<label>Agregar</label>
@@ -79,9 +79,9 @@ table {
 						<div class="col-sm-9" style="text-align: right;">
 							<label><b>TOTAL</b></label>
 							<!-- <a class="btn btn-primary btn-xs" href="ventas/modal_pay" data-toggle="ajaxModal"> <i class="fa fa-usd"></i> <span id="lbTotal"></span></a> -->
-							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal" id="btn-modal">
+							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal" id="btn-modal-cobro">
 							<i class="fa fa-usd"></i><b><span id="lbTotal"></span></b></button>
-							<input id="total" name="total" type="text" class="form-controlv">
+							<input id="total-show" name="total-show" type="hidden" class="form-controlv">
 						</div>
 					</div>
 				</section>
@@ -118,33 +118,36 @@ table {
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-9" style="text-align:right;">
-								<h4><label>Total:</label></h4>
+								<h4><label style="font-weight: bold;">Total:</label></h4>
 							</div>
 							<div class="col-sm-3" style="text-align:right;">
-								<h4><label id="lbMTotal">$0.00</label></h4>
-								<input id="mTotal" name="mTotal" type="text" value="">
+								<h4><label id="lbMTotal" style="font-weight: bold;">$0.00</label></h4>
+								<input id="mTotal" name="mTotal" type="hidden" value="">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9" style="text-align:right;">
-								<h5><label>*Efectivo:</label></h5>
+								<h5><label>*Pago en efectivo:</label></h5>
 							</div>
 							<div class="col-sm-3">
 								<?php
 								$atribInput = [
-								"type"  => "text",
+								"type"  => "number",
 								"id"    => "efectivo",
 								"name"  => "efectivo",
+								"min"=>"1" ,
+								"max"=>"999",
 								"class" => "form-control"];
 								$this->crearelemento->Input($atribInput);?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9" style="text-align:right;">
-								<h5><label>Cambio:</label></h5>
+								<h4><label style="font-weight: bold; color:#65bd77;">Cambio:</label></h4>
 							</div>
 							<div class="col-sm-3" style="text-align:right;">
-								<h5><label id="lbCambio">$0.00</label></h5>
+								<h4><label id="lbCambio" style="font-weight: bold; color:#65bd77;">$0.00</label></h4>
+								<input id="cambio" name="cambio" type="hidden" value="">
 							</div>
 						</div>
 					</div>
@@ -174,7 +177,7 @@ table {
 	  <div class="modal-footer">
 					<?php
 						$atribButton = [
-							"type"    => "submit",
+							"type"    => "button",
 							"id"      => "btn-pay",
 							"name"    => "btn-pay",
 							"class"   => "btn btn-primary",
