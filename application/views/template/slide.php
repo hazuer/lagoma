@@ -67,8 +67,8 @@
 
            <footer class="footer lt hidden-xs b-t b-dark">
                <a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon" id="persistenciaSlide"> 
-               <i class="fa fa-angle-left text"></i> 
-               <i class="fa fa-angle-right text-active"></i> 
+               <i class="fa fa-angle-right text"></i> 
+               <i class="fa fa-angle-left text-active"></i> 
                </a> 
             </footer>
 

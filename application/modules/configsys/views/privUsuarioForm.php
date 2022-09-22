@@ -204,4 +204,4 @@ function getLsPrivilegiosSubMod ($id_user,$id_system_submodulo)
   </section>
 </section>
 
-<script src ="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.custom.js" ></script>
+<!-- <script src ="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.custom.js" ></script> -->

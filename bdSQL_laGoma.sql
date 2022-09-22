@@ -280,7 +280,8 @@ INSERT INTO `inventario` (`idInventario`, `cantidad`, `articulo`, `precioNeto`, 
 (233, 300, 'Tarjeta 4x6 Raya', '45.41', '0.15136666', '0.07568333', '1', '300', '254.59', NULL, 300, '0'),
 (234, 1, 'Taza con chocolates', '20', '', '', '25', '25', '5', NULL, 1, '0'),
 (235, 12, 'Tijeras # 5', '60', '5', '2.5', '8.5', '102', '42', NULL, 12, '0'),
-(236, 10, 'Valvula', '19.99', '1.999', '0.9995', '4', '40', '20.01', NULL, 10, '0');
+(236, 10, 'Valvula', '19.99', '1.999', '0.9995', '4', '40', '20.01', NULL, 10, '0'),
+(237, 1000, 'Recarga telcel', '1', '1', '1', '1', '1', '1', 1, 1, '0');
 
 -- --------------------------------------------------------
 
@@ -448,6 +449,56 @@ INSERT INTO `system_users` (`id_system_users`, `id_persona`, `usuario`, `passwor
 (1, 0000000001, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
 (2, 0000000002, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 1);
 
+
+--
+-- Estructura de tabla para la tabla `venta`
+--
+
+CREATE TABLE `venta` (
+  `idVenta` int(10) NOT NULL,
+  `fechaVenta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idSystemUsersVenta` int(11) NOT NULL,
+  `total` float(10,2) NOT NULL,
+  `efectivo` float(10,2) NOT NULL,
+  `cambio` float(10,2) NOT NULL,
+  `numArticulos` int(11) NOT NULL,
+  `nota` text
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Indices de la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD PRIMARY KEY (`idVenta`);
+
+--
+-- AUTO_INCREMENT de la tabla `venta`
+--
+ALTER TABLE `venta`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+CREATE TABLE `venta_detalle` (
+  `idVentaDetalle` int(10) NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `fechaVentaD` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idSystemUsersVentaD` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `idInventario` int(11) NOT NULL,
+  `pu` float(10,2) NOT NULL,
+  `importe` float(10,2) NOT NULL
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Indices de la tabla `venta`
+--
+ALTER TABLE `venta_detalle`
+  ADD PRIMARY KEY (`idVentaDetalle`);
+
+--
+-- AUTO_INCREMENT de la tabla `venta_detalle`
+--
+ALTER TABLE `venta_detalle`
+  MODIFY `idVentaDetalle` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 --
 -- Índices para tablas volcadas
 --
@@ -509,7 +560,7 @@ ALTER TABLE `system_users`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --

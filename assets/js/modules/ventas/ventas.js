@@ -14,9 +14,9 @@ let totalG = '';
 			"paging": false,
 			"scrollX": false,
 			"columns" : [
-				{title: `Cantidad`, name      : `id`, data           : `id`},
 				{title: `Codigo`, name    : `name`, data         : `name`},
 				{title: `Description`, name : `content`, data      : `content`},
+				{title: `Cantidad`, name      : `id`, data           : `id`},
 				{title: `Precio Unitario`, name    : `type_business`, data: `type_business`},
 				{title: `Importe`, name: `pdate`, data        : `pdate`},
 			],
@@ -62,9 +62,9 @@ let totalG = '';
 			let t = parseFloat(0);
 			dataP.forEach(element => {
 				tblElemets += '<tr>';
-				tblElemets += '<td>' + element.cantidad + '</td>';
 				tblElemets += '<td>' + element.codigo + '</td>';
 				tblElemets += '<td>' + element.description + '</td>';
+				tblElemets += '<td>' + element.cantidad + '</td>';
 				tblElemets += '<td>' + '$'+Number(element.pu).toFixed(2) + '</td>';
 				tblElemets += '<td>' + '$'+Number((element.cantidad*element.pu)).toFixed(2)+ '</td>';
 				tblElemets += '<td> </td>';
@@ -228,6 +228,8 @@ $(document).ready(function() {
 
 		lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
 		lbImporte.html('$'+Number(imp).toFixed(2));
+		cantidad.focus();
+
 	}
 
 	$('#btn-modal-cobro').click(function(e){
@@ -292,17 +294,53 @@ $(document).ready(function() {
 			swal("Attention!", "Pago incompleto, favor de verificar", "warning");
 			return false;
 		}
-		let msjCambio='Regrese pronto';
-		if($('#cambio').val()!='0.00'){
-			msjCambio="Su cambio $"+cambio.val()+" \n Regrese pronto";
-		}
+		
+		let detalle = JSON.stringify(dataPG);
+		let formData = new FormData();
+		formData.append('total',$('#mTotal').val());
+		formData.append('efectivo',$('#efectivo').val());
+		formData.append('cambio',$('#cambio').val());
+		formData.append('nota',$('#nota').val());
+		formData.append('detalle',detalle);
 
-		swal("Gracias por su compra",msjCambio, "success");
-		console.log('continue');
-		console.log(dataPG);
+		$.ajax({
+			url: "ventas/store",
+			type       : 'POST',
+			data       : formData,
+			cache      : false,
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+			  showSwal();
+			  $('.swal-button-container').hide();
+			}
+		  })
+		  .done(function(response) {
+			//console.log(response);
+				swal.close();
+			   if(response.success==='true'){
+				let msjCambio='Regrese pronto';
+				if($('#cambio').val()!='0.00'){
+					msjCambio="Su cambio $"+cambio.val()+" \n Regrese pronto";
+				}
+				console.log(msjCambio);
+					swal("Gracias por su compra",msjCambio, "success");
+					setTimeout(function(){
+					   window.location.href = "ventas";
+					}, 5000);
+					return false;
+				}else{
+					swal('Error', response.info, "warning");
+				}
+			}).fail(function(e) {
+				console.log("error",e);
+			});
+
+		
+		//console.log('continue');
+		//console.log(dataPG);
 
 	});
-	
 
 	const showSwal = () => {
 		swal({

@@ -29,17 +29,14 @@ table {
 		<section class="scrollable padder">
 
 		<br>
+
 		<div class="row">
 			<div class="col-sm-10">
 				<section class="panel panel-default">
 					<header class="panel-heading font-bold" style="text-align:center;">
-						Venta:00061 - Fechay hora:<?php echo date("Y/m/d H:i:s"); ?> - Atiende: <?php echo $this->session->userdata('usuario'); ?>
+						Venta:<?php echo $num_padded = sprintf("%06d", $idVenta[0]->id);?> - Fechay hora:<?php echo date("Y/m/d H:i:s"); ?> - Atiende: <?php echo $this->session->userdata('usuario'); ?>
 					</header>
 					<div class="panel-body">
-						<div class="col-sm-1">
-							<label>Cantidad</label>
-							<input id="cantidad" name="cantidad" type="number" class="form-controlv" min="1" max="999" value="1">
-						</div>
 						<div class="col-sm-3">
 							<label>Codigo</label>
 							<input id="codigo" name="codigo" type="text" class="form-controlv" autofocus>
@@ -49,6 +46,10 @@ table {
 							<label>Descripcion</label>
 							<input id="description" name="description" type="text" class="form-controlv">
 							<ul class="dropdown-menu txtDescripcion" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownDescripcion"></ul>
+						</div>
+						<div class="col-sm-1">
+							<label>Cantidad</label>
+							<input id="cantidad" name="cantidad" type="number" class="form-controlv" min="1" max="999" value="1">
 						</div>
 						<div class="col-sm-1">
 							<label>Precio U.</label>
