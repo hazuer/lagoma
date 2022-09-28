@@ -59,7 +59,8 @@ class Ventas extends MX_Controller  {
         'efectivo' => $efectivo,
         'cambio'   => $cambio,
         'numArticulos'=>count($details),
-        'nota'     => $nota);
+        'nota'     => $nota,
+        'pagoP'=>$pagop);
         $this->db->INSERT('venta', $datos);
         $getLastInserted=$this->db->insert_id();
 
@@ -87,7 +88,30 @@ class Ventas extends MX_Controller  {
         ];
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($result);
+    }
 
+    function reporteg() {
+        #Se incluye el helper para validacion de modulos y submodulos
+        $this->data['idSubModule'] = 13;
+        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
+
+        $this->data['breadcrumb']        = breadcrumb($this->data['idModule'],$this->data['idSubModule']);
+        $this->data['contenidoPrincial'] = 'ventas/reporteg';
+        $this->data['desc_mod_submod']   = $this->ventas_model->getDesd_mod_submod($this->data['idSubModule']);
+        $this->data['results']           = $this->ventas_model->getVentaG();
+        $this->load->view('main_template',$this->data);
+    }
+
+    function reported() {
+        #Se incluye el helper para validacion de modulos y submodulos
+        $this->data['idSubModule'] = 14;
+        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
+
+        $this->data['breadcrumb']        = breadcrumb($this->data['idModule'],$this->data['idSubModule']);
+        $this->data['contenidoPrincial'] = 'ventas/reported';
+        $this->data['desc_mod_submod']   = $this->ventas_model->getDesd_mod_submod($this->data['idSubModule']);
+        $this->data['results']           = $this->ventas_model->getVentaD();
+        $this->load->view('main_template',$this->data);
     }
 
 }

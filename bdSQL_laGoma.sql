@@ -383,7 +383,9 @@ INSERT INTO `system_submodulo` (`id_system_submodulo`, `submodulo`, `id_modulo`)
 (9, 'Cambiar contraseña', 2),
 (10, 'Acceso no autorizado', 2),
 (11, 'Pagina de inicio ventas', 3),
-(12, 'Pagina de mostrador', 4);
+(12, 'Pagina de mostrador', 4),
+(13, 'Reporte de ventas general', 3),
+(14, 'Reporte de ventas detalle', 3);
 
 -- --------------------------------------------------------
 
@@ -424,7 +426,9 @@ INSERT INTO `system_submodulo_privilegios` (`id_system_submodulo_privilegios`, `
 (19, 1, 2, 1),
 (20, 5, 2, 1),
 (21, 6, 2, 1),
-(22, 7, 2, 1);
+(22, 7, 2, 1),
+(23, 13, 1, 1),
+(24, 14, 1, 1);
 
 
 -- --------------------------------------------------------
@@ -462,6 +466,7 @@ CREATE TABLE `venta` (
   `efectivo` float(10,2) NOT NULL,
   `cambio` float(10,2) NOT NULL,
   `numArticulos` int(11) NOT NULL,
+  `pagoP` int(11) NOT NULL,
   `nota` text
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --

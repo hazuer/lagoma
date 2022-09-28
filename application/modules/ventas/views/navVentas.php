@@ -4,7 +4,8 @@
 		<ul class="dropdown-menu animated fadeInRight">
 			<span class='arrow top'></span>
 			<?php
-				navmenuitem(13,"fa fa-bar-chart-o","ventas/cambiarPasswordForm");
+				navmenuitem(13,"fa fa-bar-chart-o","ventas/reporteg");
+				navmenuitem(14,"fa fa-bar-chart-o","ventas/reported");
 			?>
 		</ul>
 	</li>

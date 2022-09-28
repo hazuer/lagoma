@@ -33,7 +33,7 @@
 				$devUrlControlador=$row->urlControlador;
 			}
 
-			return "<ul class='breadcrumb no-border no-radius b-b b-light pull-in'> <li><a href='".base_url()."inicio'>SID</a></li><li><a href='".base_url()."$devUrlControlador'><i class='$devIcono'></i> $devModulo</a></li> <li class='active'>$devSubmodulo</li></ul>";
+			return "<ul class='breadcrumb no-border no-radius b-b b-light pull-in'><li><a href='".base_url()."$devUrlControlador'><i class='$devIcono'></i> $devModulo</a></li> <li class='active'>$devSubmodulo</li></ul>";
         }
     }
 ?>

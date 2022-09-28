@@ -90,11 +90,11 @@ table {
 		</div><!--/row-->
 
 		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%">
-		<thead><th>a</th>
-		<th>b</th>
-		<th>b</th>
-		<th>b</th>
-		<th>d</th><th>opc</th>
+		<thead><th>Codigo</th>
+		<th>Description</th>
+		<th>Cantidad</th>
+		<th>Precio Unitario</th>
+		<th>Importe</th>
 		</thead>
 		</table>
 		
@@ -105,7 +105,7 @@ table {
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Realizar cobro</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -30px;">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -150,6 +150,17 @@ table {
 								<h4><label id="lbCambio" style="font-weight: bold; color:#65bd77;">$0.00</label></h4>
 								<input id="cambio" name="cambio" type="hidden" value="">
 							</div>
+						</div>
+					</div>
+					<div class="form-group">
+					<div class="row">
+						<div class="col-sm-9" style="text-align:right;">
+							<label>Pago pendiente:</label>
+						</div>
+						<div class="col-sm-3" style="text-align:right;">
+						<input name="pagoP" id="pagoP" type="checkbox" value="1" />  
+
+						</div>
 						</div>
 					</div>
 					<div class="form-group">

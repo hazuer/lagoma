@@ -42,5 +42,18 @@ Class Ventas_model extends CI_Model {
         return $rst->result();
     }
 
+
+	function getVentaG() {
+		$getAllData="SELECT  idVenta, fechaVenta, idSystemUsersVenta, system_users.usuario, total, efectivo, cambio, numArticulos, nota, if(pagoP=0,'','Pendiente') as pagoP FROM  venta, system_users  where system_users.id_system_users =idSystemUsersVenta ORDER by idVenta desc;";
+		$query = $this->db->query($getAllData);
+		return $query->result();
+	}
+
+    function getVentaD() {
+		$getAllData="SELECT v.idVenta,v.fechaVenta,v.idSystemUsersVenta, vd.cantidad ,vd.idInventario, vd.pu, vd.importe, i.articulo  from venta v, venta_detalle vd, inventario i  where v.idVenta =vd.idVenta and vd.idInventario =i.idInventario";
+		$query = $this->db->query($getAllData);
+		return $query->result();
+	}
+
 }
 ?>
