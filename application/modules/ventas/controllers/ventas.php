@@ -69,16 +69,16 @@ class Ventas extends MX_Controller  {
             'idVenta'=>$getLastInserted,
             'idSystemUsersVentaD'=>$this->session->userdata('id_system_users'),
             'cantidad'    => $v->cantidad,
-            'idInventario' => $v->codigo,
+            'idInventario' => $v->idInventario,
             'pu'   => $v->pu,
             'importe'=>$v->importe
             );
             $this->db->INSERT('venta_detalle', $dtsDet);
             #TODO:Descontar del inventario
             /*$upInv = array('cantidad' => "cantidad - $v->cantidad");
-            $this->db->WHERE('idInventario', $v->codigo);
+            $this->db->WHERE('idInventario', $v->idInventario);
             $this->db->UPDATE('inventario', $upInv);*/
-            $upInv = "UPDATE inventario SET cantidad=cantidad-$v->cantidad WHERE idInventario=$v->codigo";
+            $upInv = "UPDATE inventario SET cantidad=cantidad-$v->cantidad WHERE idInventario=$v->idInventario";
             $this->db->query($upInv);
           }
           $result = [

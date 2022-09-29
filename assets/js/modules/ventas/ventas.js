@@ -15,6 +15,7 @@ let totalG = '';
 			"searching": false,
 			//"scrollX": false,
 			"columns" : [
+				{title: `Id`, name    : `name`, data         : `name`},
 				{title: `Codigo`, name    : `name`, data         : `name`},
 				{title: `Description`, name : `content`, data      : `content`},
 				{title: `Cantidad`, name      : `id`, data           : `id`},
@@ -37,6 +38,7 @@ let totalG = '';
 		let addProduct     = $('#addProduct');
 		let cantidad       = $('#cantidad');
 		let codigo         = $('#codigo');
+		let idInventario        = $('#idInventario');
 		let description    = $('#description');
 		let precioUnitario = $('#precioUnitario');
 		let importe        = $('#importe');
@@ -46,12 +48,13 @@ let totalG = '';
 		let dataP = [];
 
 		addProduct.click(function(e){
-			if(cantidad.val()=='' || codigo.val()=='' || description.val()=='' || precioUnitario.val()=='' || importe.val()==''){
+			if(cantidad.val()=='' || codigo.val()=='' || description.val()=='' || precioUnitario.val()=='' || importe.val()=='' || idInventario.val()==''){
 				swal("Atención!", "Debes agregar o seleccionar un producto del inventario", "warning");
 				return false;
 			}
 			let element = {};
 			element.cantidad = cantidad.val();
+			element.idInventario = idInventario.val();
 			element.codigo = codigo.val();
 			element.description = description.val();
 			element.pu = precioUnitario.val();
@@ -67,6 +70,7 @@ let totalG = '';
 			let t = parseFloat(0);
 			dataP.forEach(element => {
 				tblElemets += '<tr>';
+				tblElemets += '<td>' + element.idInventario + '</td>';
 				tblElemets += '<td>' + element.codigo + '</td>';
 				tblElemets += '<td>' + element.description + '</td>';
 				tblElemets += '<td>' + element.cantidad + '</td>';
@@ -84,6 +88,7 @@ let totalG = '';
 
 			//reset form add
 			cantidad.val('1');
+			idInventario.val('');
 			codigo.val('');
 			codigo.focus();
 			description.val('');
@@ -112,7 +117,10 @@ $(document).ready(function() {
 	let description    = $('#description');
 	let precioUnitario = $('#precioUnitario');
 	let importe        = $('#importe');
+	let idInventario        = $('#idInventario');
+
 	description.keyup(function () {
+		console.log(description.val());
         $.ajax({
             type: "POST",
             url: "ventas/GetCountryName",
@@ -121,19 +129,40 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function (data) {
+				console.log(data.length);
                 if (data.length > 0) {
+					console.log('mayor a 0');
                     $('#DropdownDescripcion').empty();
                     description.attr("data-toggle", "dropdown");
                     $('#DropdownDescripcion').dropdown('toggle');
                 }
                 else if (data.length == 0) {
+					console.log('igual a 0');
                     description.attr("data-toggle", "");
                 }
                 $.each(data, function (key,value) {
+					console.log('each',value['articulo']);
                     if (data.length >= 0)
-                        $('#DropdownDescripcion').append('<li role="displayCountries" ><a role="menuitem DropdownDescripcionli" class="dropdownlivalue" data-idinventario="'+value['idInventario']+'" data-precioneto="'+value['precioNeto']+'">' + value['articulo'] + '</a></li>');
+                        $('#DropdownDescripcion').append('<li role="displayCountries" ><a role="menuitem DropdownDescripcionli" class="dropdownlivalue" data-idinventario="'+value['idInventario']+'" data-precioneto="'+value['precioNeto']+'" data-codigobarras="'+value['codigo_barras']+'" data-idinventario="'+value['idInventario']+'">' + value['articulo'] + '</a></li>');
                 });
-            }
+				/*let x=description.val();
+				if (x.length % 2 == 0){
+				console.log('even');
+				}
+				else{
+				console.log('odd');
+				$('#description').click();
+				}*/
+				/*setTimeout(function(){
+					$('#description').click();
+				 }, 50);*/
+				
+            },complete: function(data) {
+				console.log("SEMPRE FUNFA!");
+				/*setTimeout(function(){
+					$('#description').click();
+				 }, 500);*/
+			}
         });
     });
 
@@ -185,13 +214,15 @@ $(document).ready(function() {
 
     $('ul.txtDescripcion').on('click', 'li a', function () {
 		let cant = parseFloat(cantidad.val());
-		let cod= $(this).data("idinventario");
+		let cod= $(this).data("codigobarras");
         let desc=$(this).text();
 		let pu = parseFloat($(this).data("precioneto"));
-		fillClicProduct(cant,cod,desc,pu);
+		let idInv = $(this).data("idinventario");
+		fillClicProduct(cant,cod,desc,pu,idInv);
     });
 
 	$("#codigo").keyup(function () {
+		console.log($("#codigo").val());
         $.ajax({
             type: "POST",
             url: "ventas/getCodeB",
@@ -200,17 +231,21 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function (data) {
+				console.log(data.length);
                 if (data.length > 0) {
+					console.log('mayor a 0');
                     $('#DropdownCodigo').empty();
                     codigo.attr("data-toggle", "dropdown");
                     $('#DropdownCodigo').dropdown('toggle');
                 }
                 else if (data.length == 0) {
+					console.log('igual a 0');
                     codigo.attr("data-toggle", "");
                 }
                 $.each(data, function (key,value) {
+					console.log('each',value['articulo']);
                     if (data.length >= 0)
-                        $('#DropdownCodigo').append('<li role="displayCountries" ><a role="menuitem DropdownCodigoli" class="dropdownlivalue" data-articulo="'+value['articulo']+'" data-precioneto="'+value['precioNeto']+'">' + value['idInventario'] + '</a></li>');
+                        $('#DropdownCodigo').append('<li role="displayCountries" ><a role="menuitem DropdownCodigoli" class="dropdownlivalue" data-articulo="'+value['articulo']+'" data-precioneto="'+value['precioNeto']+'" data-codigobarras="'+value['codigo_barras']+'" data-idinventario="'+value['idInventario']+'">' + value['codigo_barras'] + '</a></li>');
                 });
             }
         });
@@ -221,16 +256,18 @@ $(document).ready(function() {
         let cod  = $(this).text();
 		let desc = $(this).data("articulo");
 		let pu   = parseFloat($(this).data("precioneto"));
+		let idInv = $(this).data("idinventario");
 
-		fillClicProduct(cant,cod,desc,pu);
+		fillClicProduct(cant,cod,desc,pu,idInv);
     });
 
-	function fillClicProduct(cant, cod, desc, pu){
+	function fillClicProduct(cant, cod, desc, pu,idInv){
 		let imp = parseFloat(cant*pu);
 		codigo.val(cod);
 		description.val(desc);
 		precioUnitario.val(pu);
 		importe.val(imp);
+		idInventario.val(idInv);
 
 		lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
 		lbImporte.html('$'+Number(imp).toFixed(2));

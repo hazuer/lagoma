@@ -38,6 +38,7 @@ table {
 					</header>
 					<div class="panel-body">
 						<div class="col-sm-3">
+							<input id="idInventario" name="idInventario" type="text" class="form-controlv" value="">
 							<label>Codigo</label>
 							<input id="codigo" name="codigo" type="text" class="form-controlv" autofocus>
 							<ul class="dropdown-menu txtCodigo" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCodigo"></ul>
@@ -90,7 +91,9 @@ table {
 		</div><!--/row-->
 
 		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%">
-		<thead><th>Codigo</th>
+		<thead>
+		<th>idInv</th>
+		<th>Codigo</th>
 		<th>Description</th>
 		<th>Cantidad</th>
 		<th>Precio Unitario</th>
@@ -209,3 +212,4 @@ table {
   </section>
 </section>
 
+<script src="<?php echo base_url(); ?>assets/js/modules/ventas/ventas.js"></script>
