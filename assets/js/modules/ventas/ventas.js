@@ -16,8 +16,8 @@ let totalG = '';
 			//"scrollX": false,
 			"columns" : [
 				{title: `Id`, name    : `name`, data         : `name`},
-				{title: `Codigo`, name    : `name`, data         : `name`},
-				{title: `Description`, name : `content`, data      : `content`},
+				{title: `Código de Barras`, name    : `name`, data         : `name`},
+				{title: `Descripción`, name : `content`, data      : `content`},
 				{title: `Cantidad`, name      : `id`, data           : `id`},
 				{title: `Precio Unitario`, name    : `type_business`, data: `type_business`},
 				{title: `Importe`, name: `pdate`, data        : `pdate`},
@@ -70,7 +70,6 @@ let totalG = '';
 			let t = parseFloat(0);
 			dataP.forEach(element => {
 				tblElemets += '<tr>';
-				tblElemets += '<td>' + element.idInventario + '</td>';
 				tblElemets += '<td>' + element.codigo + '</td>';
 				tblElemets += '<td>' + element.description + '</td>';
 				tblElemets += '<td>' + element.cantidad + '</td>';
@@ -119,8 +118,31 @@ $(document).ready(function() {
 	let importe        = $('#importe');
 	let idInventario        = $('#idInventario');
 
+	codigo.keypress(function(e) {
+        let code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13){
+		   $.ajax({
+            type: "POST",
+            url: "ventas/getCodeB",
+            data: {
+                keyword: codigo.val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.length == 1) {
+					fillClicProduct(1,data[0].codigo_barras,data[0].articulo,data[0].precioNeto,data[0].idInventario);
+					$("#addProduct").trigger("click");
+                }else{
+					swal("Atención!", "Código de Barras: "+codigo.val()+" no disponible en el inventario", "warning");
+					codigo.val('');
+					return false;
+				}
+            }
+        });
+        }
+    });
+
 	description.keyup(function () {
-		console.log(description.val());
         $.ajax({
             type: "POST",
             url: "ventas/GetCountryName",
@@ -129,80 +151,62 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function (data) {
-				console.log(data.length);
                 if (data.length > 0) {
-					console.log('mayor a 0');
                     $('#DropdownDescripcion').empty();
                     description.attr("data-toggle", "dropdown");
                     $('#DropdownDescripcion').dropdown('toggle');
                 }
                 else if (data.length == 0) {
-					console.log('igual a 0');
                     description.attr("data-toggle", "");
                 }
                 $.each(data, function (key,value) {
-					console.log('each',value['articulo']);
                     if (data.length >= 0)
                         $('#DropdownDescripcion').append('<li role="displayCountries" ><a role="menuitem DropdownDescripcionli" class="dropdownlivalue" data-idinventario="'+value['idInventario']+'" data-precioneto="'+value['precioNeto']+'" data-codigobarras="'+value['codigo_barras']+'" data-idinventario="'+value['idInventario']+'">' + value['articulo'] + '</a></li>');
                 });
-				/*let x=description.val();
-				if (x.length % 2 == 0){
-				console.log('even');
-				}
-				else{
-				console.log('odd');
-				$('#description').click();
-				}*/
-				/*setTimeout(function(){
-					$('#description').click();
-				 }, 50);*/
-				
-            },complete: function(data) {
-				console.log("SEMPRE FUNFA!");
-				/*setTimeout(function(){
-					$('#description').click();
-				 }, 500);*/
-			}
+            }
         });
     });
 
+	$('ul.txtDescripcion').on('click', 'li a', function () {
+		let cant = parseFloat(cantidad.val());
+		let cod= $(this).data("codigobarras");
+        let desc=$(this).text();
+		let pu = parseFloat($(this).data("precioneto"));
+		let idInv = $(this).data("idinventario");
+		fillClicProduct(cant,cod,desc,pu,idInv,true);
+    });
 
 	$("#description").change(function () {
-		precioUnitario.val('');
-		importe.val('');
-		lbPrecioUnitario.html('$0.00');
-		lbImporte.html('$0.00');
+		resetFields();
 	});
+
 	$("#codigo").change(function () {
+		resetFields();
+	});
+
+	function resetFields(){
 		precioUnitario.val('');
 		importe.val('');
 		lbPrecioUnitario.html('$0.00');
 		lbImporte.html('$0.00');
-	});
+	}
 
 	$("#cantidad").keyup(function () {
 		if($(this).val()==0){
 			$("#cantidad").val(1);
 		}
-
-		if(precioUnitario.val()!='' && importe.val()!=''){
-			console.log('recalcular keyup');
-			let cant = parseFloat(cantidad.val());
-			let pu = parseFloat(precioUnitario.val());
-			let imp = parseFloat(cant*pu);
-			importe.val(imp);
-			lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
-			lbImporte.html('$'+Number(imp).toFixed(2));
-		}
+		recalcularCantidad();
 	});
 
 	$("#cantidad").change(function () {
 		if($(this).val()==0){
 			$("#cantidad").val(1);
 		}
+		recalcularCantidad();
+	});
 
+	function recalcularCantidad(){
 		if(precioUnitario.val()!='' && importe.val()!=''){
-			console.log('recalcular change');
 			let cant = parseFloat(cantidad.val());
 			let pu = parseFloat(precioUnitario.val());
 			let imp = parseFloat(cant*pu);
@@ -210,58 +214,16 @@ $(document).ready(function() {
 			lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
 			lbImporte.html('$'+Number(imp).toFixed(2));
 		}
+	}
+
+	$("#cantidad").keypress(function(e) {
+        let code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13){
+			$("#addProduct").trigger("click");
+		}
 	});
 
-    $('ul.txtDescripcion').on('click', 'li a', function () {
-		let cant = parseFloat(cantidad.val());
-		let cod= $(this).data("codigobarras");
-        let desc=$(this).text();
-		let pu = parseFloat($(this).data("precioneto"));
-		let idInv = $(this).data("idinventario");
-		fillClicProduct(cant,cod,desc,pu,idInv);
-    });
-
-	$("#codigo").keyup(function () {
-		console.log($("#codigo").val());
-        $.ajax({
-            type: "POST",
-            url: "ventas/getCodeB",
-            data: {
-                keyword: $("#codigo").val()
-            },
-            dataType: "json",
-            success: function (data) {
-				console.log(data.length);
-                if (data.length > 0) {
-					console.log('mayor a 0');
-                    $('#DropdownCodigo').empty();
-                    codigo.attr("data-toggle", "dropdown");
-                    $('#DropdownCodigo').dropdown('toggle');
-                }
-                else if (data.length == 0) {
-					console.log('igual a 0');
-                    codigo.attr("data-toggle", "");
-                }
-                $.each(data, function (key,value) {
-					console.log('each',value['articulo']);
-                    if (data.length >= 0)
-                        $('#DropdownCodigo').append('<li role="displayCountries" ><a role="menuitem DropdownCodigoli" class="dropdownlivalue" data-articulo="'+value['articulo']+'" data-precioneto="'+value['precioNeto']+'" data-codigobarras="'+value['codigo_barras']+'" data-idinventario="'+value['idInventario']+'">' + value['codigo_barras'] + '</a></li>');
-                });
-            }
-        });
-    });
-
-    $('ul.txtCodigo').on('click', 'li a', function () {
-		let cant = parseFloat(cantidad.val());
-        let cod  = $(this).text();
-		let desc = $(this).data("articulo");
-		let pu   = parseFloat($(this).data("precioneto"));
-		let idInv = $(this).data("idinventario");
-
-		fillClicProduct(cant,cod,desc,pu,idInv);
-    });
-
-	function fillClicProduct(cant, cod, desc, pu,idInv){
+	function fillClicProduct(cant, cod, desc, pu,idInv,focusCant=false){
 		let imp = parseFloat(cant*pu);
 		codigo.val(cod);
 		description.val(desc);
@@ -272,11 +234,14 @@ $(document).ready(function() {
 		lbPrecioUnitario.html('$'+Number(pu).toFixed(2));
 		lbImporte.html('$'+Number(imp).toFixed(2));
 		cantidad.focus();
-
+		if(focusCant){
+			setTimeout(function(){
+				$('#cantidad').select();
+			}, 250);
+		}
 	}
 
 	$('#btn-modal-cobro').click(function(e){
-		console.log('total',$('#total-show').val());
 		if($('#total-show').val()==''){
 			swal("Atención!", "No es posible efectuar el cobro por $0.00 pesos", "warning");
 			return false;
@@ -294,33 +259,24 @@ $(document).ready(function() {
 	});
 
 	$('#efectivo').keyup(function(e){
-		console.log('here press key up');
-		console.log($(this).val());
-		let mt=$('#mTotal').val();
-		let cap = $(this).val();
-		if(cap==''){
-			$('#lbCambio').html('$0.00');
-			return false;
-		}
-		let cambio = parseFloat(cap-mt);
-		console.log(cambio);
-		$('#lbCambio').html('$'+Number(cambio).toFixed(2));
-		$('#cambio').val(Number(cambio).toFixed(2));
+		recalcularEfectivo();
 	});
+
 	$('#efectivo').change(function(e){
-		console.log('here change');
-		console.log($(this).val());
+		recalcularEfectivo();
+	});
+
+	function recalcularEfectivo(){
 		let mt=$('#mTotal').val();
-		let cap = $(this).val();
+		let cap = $('#efectivo').val();
 		if(cap==''){
 			$('#lbCambio').html('$0.00');
 			return false;
 		}
 		let cambio = parseFloat(cap-mt);
-		console.log(cambio);
 		$('#lbCambio').html('$'+Number(cambio).toFixed(2));
 		$('#cambio').val(Number(cambio).toFixed(2));
-	});
+	}
 
 	$('#btn-pay').click(function(e){
 		let efectivo = $('#efectivo');
@@ -332,7 +288,6 @@ $(document).ready(function() {
 		}
 
 		let p = Math.sign(cambio.val());
-		console.log(p);
 		if( p==-1){
 			swal("Atención!", "Pago incompleto, favor de verificar", "warning");
 			return false;
@@ -363,35 +318,14 @@ $(document).ready(function() {
 			}
 		  })
 		  .done(function(response) {
-			//console.log(response);
 				swal.close();
 			   if(response.success==='true'){
-				
+
 				let msjCambio='Regrese pronto';
 				if($('#cambio').val()!='0.00'){
 					msjCambio="Su cambio $"+cambio.val()+" \n Regrese pronto";
 				}
-				console.log(msjCambio);
-					//swal("Gracias por su compra",msjCambio +'<div id="newv"></div>', "success");
-					/*setTimeout(function(){
-					   window.location.href = "ventas";
-					}, 5000);*/
-					//$('.swal-button-container').hide();
-					/*swal({
-						title: 'Gracias por su compra',
-						text: msjCambio,
-						type: 'success',
-						showCancelButton: true,
-						confirmButtonColor: '#3085d6',
-						cancelButtonColor: '#d33',
-						confirmButtonText: 'new vent!'
-					  }).then(function() {
-						swal(
-						  'Deleted!',
-						  'Your file has been deleted.',
-						  'success'
-						)
-					  });*/
+
 					  $("#exampleModal").modal('hide');
 					  swal({
 						icon: "success",
@@ -406,30 +340,16 @@ $(document).ready(function() {
 							},
 						  }
 					  }).then(function() {
-						/*swal(
-						  'Deleted!',
-						  'Your file has been deleted.',
-						  'success'
-						)*/
 						window.location.href = "ventas";
 					  });
-					
 					return false;
 				}else{
 					swal('Error', response.info, "warning");
 				}
 			}).fail(function(e) {
-				console.log("error",e);
+				swal('Error', e, "warning");
 			});
 
-		
-		//console.log('continue');
-		//console.log(dataPG);
-
-	});
-
-	$('.swal-button--newventa').click(function(e){
-		console.log('reload');
 	});
 
 	const showSwal = () => {

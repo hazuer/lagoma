@@ -39,21 +39,21 @@ table {
 					<div class="panel-body">
 						<div class="col-sm-3">
 							<input id="idInventario" name="idInventario" type="hidden" class="form-controlv" value="">
-							<label>Codigo</label>
+							<label>Código de Barras</label>
 							<input id="codigo" name="codigo" type="text" class="form-controlv" autofocus>
 							<ul class="dropdown-menu txtCodigo" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCodigo"></ul>
 						</div>
 						<div class="col-sm-5">
-							<label>Descripcion</label>
+							<label>Descripción</label>
 							<input id="description" name="description" type="text" class="form-controlv">
 							<ul class="dropdown-menu txtDescripcion" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownDescripcion"></ul>
 						</div>
-						<div class="col-sm-1">
+						<div class="col-sm-2">
 							<label>Cantidad</label>
 							<input id="cantidad" name="cantidad" type="number" class="form-controlv" min="1" max="999" value="1">
 						</div>
 						<div class="col-sm-1">
-							<label>Precio U.</label>
+							<label>P. Unit.</label>
 							<label id="lbPrecioUnitario"></label>
 							<input id="precioUnitario" name="precioUnitario" type="hidden" class="form-controlv" value="">
 						</div>
@@ -62,8 +62,7 @@ table {
 							<label id="lbImporte"></label>
 							<input id="importe" name="importe" type="hidden" class="form-controlv" value="">
 						</div>
-						<div class="col-sm-1">
-							<label>Agregar</label>
+						<div class="col-sm-1" style="display:none;">
 							<button id="addProduct" name="addProduct" class="btn btn-success btn-xs" title="Agregar">
 								<i class="fa fa-plus"></i>
 							</button>
@@ -90,15 +89,15 @@ table {
 			</div>
 		</div><!--/row-->
 
-		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%">
-		<thead>
-		<th>idInv</th>
-		<th>Codigo</th>
-		<th>Description</th>
-		<th>Cantidad</th>
-		<th>Precio Unitario</th>
-		<th>Importe</th>
-		</thead>
+		<table id="tbl-product" class="table table-striped table-bordered nowrap table-hover" cellspacing="0" style="width:100%" style="display:none;">
+			<thead>
+				<th style="display:none;">idInv</th>
+				<th>Código de Barras</th>
+				<th>Descripción</th>
+				<th>Cantidad</th>
+				<th>Precio Unitario</th>
+				<th>Importe</th>
+			</thead>
 		</table>
 		
 
@@ -139,6 +138,7 @@ table {
 								"type"  => "number",
 								"id"    => "efectivo",
 								"name"  => "efectivo",
+								"autocomplete"=>"off",
 								"min"=>"1" ,
 								"max"=>"999",
 								"class" => "form-control"];

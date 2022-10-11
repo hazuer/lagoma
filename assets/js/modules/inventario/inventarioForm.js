@@ -47,7 +47,7 @@ $(document).ready(function() {
             
         }
     });
-
+$('#codigo_barras').focus();
 });
 
 let idInventario = $('#idInventario');
@@ -63,7 +63,7 @@ let estatus        = $('#estatus');
 function sendData(){
 
     if( codigo_barras.val()=='' || cantidad.val()=='' || articulo.val()=='' || precioNeto.val()==''){
-        swal("Attention!", "Required fields (*)", "warning");
+        swal("Atención!", "Campos requeridos (*)", "warning");
         return false;
     }
 

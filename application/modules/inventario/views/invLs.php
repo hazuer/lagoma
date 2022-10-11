@@ -27,12 +27,12 @@
             <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesGeneric">
               <thead>
                 <tr>
-				<th>Codigo de Barras</th>
+				<th>Código de Barras</th>
 				<th>Cantidad</th>
 				<th>Articulo</th>
 				<th>Precio Neto</th>
 				<th>Precio Compra</th>
-				<th>Stock Min.</th>
+				<th>Stock Mín.</th>
         <th>Estatus</th>
                   <th aling="center"> </th>
                 </tr>

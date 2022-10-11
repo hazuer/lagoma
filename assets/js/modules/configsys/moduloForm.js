@@ -60,7 +60,7 @@ let classColor        = $('#classColor');
 function sendData(){
 
     if( modulo.val()=='' || desc_modulo.val()=='' || urlControlador.val()=='' || icono.val()==''){
-        swal("Attention!", "Required fields (*)", "warning");
+        swal("Atención!", "Campos requeridos (*)", "warning");
         return false;
     }
 

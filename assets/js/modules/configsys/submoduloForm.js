@@ -36,7 +36,7 @@ let submodulo           = $('#submodulo');
 function sendData(){
 
     if( id_modulo.val()=='' || submodulo.val()==''){
-        swal("Attention!", "Required fields (*)", "warning");
+        swal("Atención!", "Campos requeridos (*)", "warning");
         return false;
     }
 

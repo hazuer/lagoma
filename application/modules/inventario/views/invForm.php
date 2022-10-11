@@ -26,18 +26,18 @@
 		<button type="button" class="close" data-dismiss="modal">×</button> 
 		<h4 class="modal-title"><?php echo $titleForm;?></h4>
 		</div>
-		<form class="form-horizontal" id="idInventarioForm" onsubmit="return false">
+		<form class="form-horizontal" id="idInventarioForm" onsubmit="return false" autocomplete="off">
 		<div class="modal-body">
 
 			<?php
 			$atribInput = [
-			"type"  => "text",
+			"type"  => "hidden",
 			"id"    => "idInventario",
 			"name"  => "idInventario",
 			"value" => $idInventario];
 			$this->crearelemento->Input($atribInput);
 			$atribInput = [
-			"type"  => "text",
+			"type"  => "hidden",
 			"id"    => "action",
 			"name"  => "action",
 			"value" => $action];
@@ -116,7 +116,7 @@
 					?>
 					<?php echo form_error('puCompra'); ?>
 				</div>
-				<label class="col-md-2 control-label">Stock Minimo:</label>
+				<label class="col-md-2 control-label">Stock Mínimo:</label>
 				<div class="col-md-4">
 					<?php
 					$atribInput = [
@@ -133,13 +133,14 @@
 
 			<div class="form-group">
 						<label class="col-md-2 control-label">Estatus:</label>
-						<div class="col-lg-4">
+						<div class="col-md-4">
 							<select name="estatus" id="estatus" class="form-control">
 								<option value="1" <?php if($estatus==1){echo"selected";}?>>Activo</option>
 								<option value="0" <?php if($estatus==0){echo"selected";}?>>Inactivo</option>
 							</select>
 							<?php echo form_error('estatus'); ?>
 						</div>
+						<div class="col-md-6"></div>
 					</div>
 
 		</div>

@@ -59,7 +59,7 @@ let statusu          = $('#status');
 function sendData(){
 
     if( nombre.val()=='' || curp.val()=='' || usuario.val()=='' || password.val()==''){
-        swal("Attention!", "Required fields (*)", "warning");
+        swal("Atención!", "Campos requeridos (*)", "warning");
         return false;
     }
 
