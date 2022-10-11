@@ -33,7 +33,8 @@ Class Inventario_model extends CI_Model
   precioNeto,
   puCompra,
   codigo_barras,
-  stock_min
+  stock_min, 
+  if(estatus=1,'Activo','Inactivo') as estatus
     FROM
     inventario";
     $query = $this->db->query($sql);

@@ -71,7 +71,8 @@ class Inventario extends MX_Controller  {
         'articulo' => $articulo,
         'precioNeto'          => $precioNeto,
         'puCompra'          => $puCompra,
-        'stock_min'     => $stock_min);
+        'stock_min'     => $stock_min,
+        'estatus'     => $estatus);
 
         if ($action=="new") {
             $datos['idInventario'] = null;

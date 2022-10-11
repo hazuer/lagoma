@@ -7,6 +7,7 @@
 	$puCompra='';
 	$codigo_barras='';
 	$stock_min='1';
+	$estatus='1';
     $submodulo           = "Agregar producto";
     $id_modulo           = "";
     $titleForm           = "Agregar producto";
@@ -25,18 +26,18 @@
 		<button type="button" class="close" data-dismiss="modal">×</button> 
 		<h4 class="modal-title"><?php echo $titleForm;?></h4>
 		</div>
-		<form class="form-horizontal" id="idInventario" onsubmit="return false">
+		<form class="form-horizontal" id="idInventarioForm" onsubmit="return false">
 		<div class="modal-body">
 
 			<?php
 			$atribInput = [
-			"type"  => "hidden",
+			"type"  => "text",
 			"id"    => "idInventario",
 			"name"  => "idInventario",
 			"value" => $idInventario];
 			$this->crearelemento->Input($atribInput);
 			$atribInput = [
-			"type"  => "hidden",
+			"type"  => "text",
 			"id"    => "action",
 			"name"  => "action",
 			"value" => $action];
@@ -129,6 +130,17 @@
 					<?php echo form_error('stock_min'); ?>
 				</div>
 			</div>
+
+			<div class="form-group">
+						<label class="col-md-2 control-label">Estatus:</label>
+						<div class="col-lg-4">
+							<select name="estatus" id="estatus" class="form-control">
+								<option value="1" <?php if($estatus==1){echo"selected";}?>>Activo</option>
+								<option value="0" <?php if($estatus==0){echo"selected";}?>>Inactivo</option>
+							</select>
+							<?php echo form_error('estatus'); ?>
+						</div>
+					</div>
 
 		</div>
 

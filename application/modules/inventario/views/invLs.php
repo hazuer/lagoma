@@ -27,12 +27,13 @@
             <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesGeneric">
               <thead>
                 <tr>
-				<th>codigo_barras</th>
-				<th>cantidad</th>
-				<th>articulo</th>
-				<th>precioNeto</th>
-				<th>puCompra</th>
-				<th>stock_min</th>
+				<th>Codigo de Barras</th>
+				<th>Cantidad</th>
+				<th>Articulo</th>
+				<th>Precio Neto</th>
+				<th>Precio Compra</th>
+				<th>Stock Min.</th>
+        <th>Estatus</th>
                   <th aling="center"> </th>
                 </tr>
               </thead>
@@ -46,6 +47,7 @@
                   <td>".$result->precioNeto."</td>
                   <td>".$result->puCompra."</td>
 				  <td>".$result->stock_min."</td>
+          <td>".$result->estatus."</td>
                   <td align='center'>";
 					$this->crearelemento->LoadModal("inventario/invForm/",url_encode($result->idInventario),"btn btn-primary btn-xs","Editar","fa fa-edit");
                   echo"</td>

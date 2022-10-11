@@ -38,7 +38,7 @@ table {
 					</header>
 					<div class="panel-body">
 						<div class="col-sm-3">
-							<input id="idInventario" name="idInventario" type="text" class="form-controlv" value="">
+							<input id="idInventario" name="idInventario" type="hidden" class="form-controlv" value="">
 							<label>Codigo</label>
 							<input id="codigo" name="codigo" type="text" class="form-controlv" autofocus>
 							<ul class="dropdown-menu txtCodigo" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCodigo"></ul>

@@ -19,7 +19,7 @@ Class Ventas_model extends CI_Model {
         #$this->db->order_by('id', 'DESC');
         #$this->db->like("articulo", $keyword);
        # var_dump($this->db);
-       $sqlExistPerson = "SELECT idInventario,codigo_barras, articulo, precioNeto FROM inventario WHERE articulo like'%$keyword%' AND cantidad>0 LIMIT 10";
+       $sqlExistPerson = "SELECT idInventario,codigo_barras, articulo, precioNeto FROM inventario WHERE articulo like'%$keyword%' AND cantidad>0 AND estatus=1 LIMIT 10";
         $respExistP     = $this->db->query($sqlExistPerson);
        # return $this->db->get('inventario');
        return $respExistP->result();
@@ -29,7 +29,7 @@ Class Ventas_model extends CI_Model {
         #$this->db->order_by('id', 'DESC');
         #$this->db->like("articulo", $code);
        # var_dump($this->db);
-       $sqlExistPerson = "SELECT idInventario,codigo_barras, articulo, precioNeto FROM inventario WHERE codigo_barras=$code AND cantidad>0 LIMIT 10";
+       $sqlExistPerson = "SELECT idInventario,codigo_barras, articulo, precioNeto FROM inventario WHERE codigo_barras=$code AND cantidad>0 AND estatus=1 LIMIT 10";
         $respExistP    = $this->db->query($sqlExistPerson);
        # return $this->db->get('inventario');
        return $respExistP->result();

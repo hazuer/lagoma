@@ -6,8 +6,8 @@
 
 //Valida alta y edición de modulos
 $(document).ready(function() {
-    let  idInventario = $("#idInventario");
-    idInventario.formValidation ({
+    let  idInventarioForm = $("#idInventarioForm");
+    idInventarioForm.formValidation ({
         framework: 'bootstrap',
         excluded: [':disabled'],
         icon: {
@@ -58,6 +58,7 @@ let articulo       = $('#articulo');
 let precioNeto    = $('#precioNeto');
 let puCompra             = $('#puCompra');
 let stock_min        = $('#stock_min');
+let estatus        = $('#estatus');
 
 function sendData(){
 
@@ -75,6 +76,7 @@ function sendData(){
     formData.append('precioNeto',precioNeto.val());
     formData.append('puCompra',puCompra.val());
     formData.append('stock_min',stock_min.val());
+    formData.append('estatus',estatus.val());
     $.ajax({
         url        : 'inventario/inventarioAction',
         type       : 'POST',
