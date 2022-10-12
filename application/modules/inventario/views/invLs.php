@@ -1,3 +1,10 @@
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src=" <?php echo base_url(); ?>assets/js/datatables_export/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/pdfmake.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/js/datatables_export/buttons.print.min.js"></script>
 
 <section id="content">
 	<section class="vbox">
@@ -24,7 +31,7 @@
           <header class="panel-heading font-bold">Todo el inventario</header>  
           
           <div class="table-responsive">
-            <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesGeneric">
+            <table class="table table-striped table-bordered m-b-none" data-ride="dataTablesButons">
               <thead>
                 <tr>
 				<th>Código de Barras</th>
@@ -64,3 +71,5 @@
     </section>
   </section>
 </section>
+
+<script src ="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.buttons.js"></script>
