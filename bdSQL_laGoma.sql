@@ -40,7 +40,7 @@ CREATE TABLE `inventario` (
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO lagoma.inventario (`idInventario`,`cantidad`,`articulo`,`precioNeto`,`puCompra`,`codigo_barras`,`stock_min`,`estatus`) VALUES
+INSERT INTO inventario (`idInventario`,`cantidad`,`articulo`,`precioNeto`,`puCompra`,`codigo_barras`,`stock_min`,`estatus`) VALUES
 (1,100, 'BOLSA KRAFT PINTADA CHICA 61003 SIN ASIGNAR', 50,50, '008049711', 10,1),
 (2,100, 'COLORES BEROL RECREO LARGOS C/12 BEROL', 50,50, '0200220342', 10,1),
 (3,100, 'MARCADOR SHARPIE DOBLE PUNTA 26146 NEGRO SHARPIE', 50,50, '020027034', 10,1),
@@ -200,7 +200,8 @@ INSERT INTO `system_submodulo` (`id_system_submodulo`, `submodulo`, `id_modulo`)
 (11, 'Pagina de inicio ventas', 3),
 (12, 'Pagina de mostrador', 4),
 (13, 'Reporte general de ventas', 3),
-(14, 'Reporte detallado de ventas', 3);
+(14, 'Reporte detallado de ventas', 3),
+(15, 'Reporte de inventario', 4);
 
 -- --------------------------------------------------------
 
@@ -243,7 +244,8 @@ INSERT INTO `system_submodulo_privilegios` (`id_system_submodulo_privilegios`, `
 (21, 6, 2, 1),
 (22, 7, 2, 1),
 (23, 13, 1, 1),
-(24, 14, 1, 1);
+(24, 14, 1, 1),
+(25, 15, 1, 1);
 
 
 -- --------------------------------------------------------
@@ -395,7 +397,7 @@ ALTER TABLE `system_modulos`
 -- AUTO_INCREMENT de la tabla `system_modulos_privilegios`
 --
 ALTER TABLE `system_modulos_privilegios`
-  MODIFY `id_system_modulos_privilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_system_modulos_privilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `system_submodulo`
 --
@@ -405,7 +407,7 @@ ALTER TABLE `system_submodulo`
 -- AUTO_INCREMENT de la tabla `system_submodulo_privilegios`
 --
 ALTER TABLE `system_submodulo_privilegios`
-  MODIFY `id_system_submodulo_privilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_system_submodulo_privilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `system_users`
 --

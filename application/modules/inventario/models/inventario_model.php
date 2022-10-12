@@ -41,5 +41,22 @@ Class Inventario_model extends CI_Model
     return $query->result();
   }
 
+
+  function getStockMin() {
+    $sql="SELECT
+   idInventario,
+   cantidad,
+   articulo,
+   precioNeto,
+   puCompra,
+   codigo_barras,
+   stock_min, 
+   if(estatus=1,'Activo','Inactivo') as estatus
+     FROM
+     inventario 
+     WHERE stock_min>=cantidad";
+     $query = $this->db->query($sql);
+     return $query->result();
+   }
 }
 ?>

@@ -1,11 +1,11 @@
-<!-- <ul class="nav navbar-nav navbar-left m-n hidden-xs nav-user">
+<ul class="nav navbar-nav navbar-left m-n hidden-xs nav-user">
 	<li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> Perfil de usuario <b class="caret"></b></a>
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bar-chart-o" aria-hidden="true"></i> Reportes <b class="caret"></b></a>
 		<ul class="dropdown-menu animated fadeInRight">
-		<span class='arrow top'></span>
+			<span class='arrow top'></span>
 			<?php
-				#navmenuitem(9,"fa fa-lock","inicio/cambiarPasswordForm");
+				navmenuitem(15,"fa fa-bar-chart-o","inventario/reportestock");
 			?>
 		</ul>
 	</li>
-</ul> -->
+</ul>

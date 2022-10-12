@@ -98,6 +98,17 @@ class Inventario extends MX_Controller  {
         die();
     }
 
+    function reportestock() {
+        #Se incluye el helper para validacion de modulos y submodulos
+        $this->data['idSubModule'] = 15;
+        validamodulosysubmodulos($this->data['idModule'],$this->data['idSubModule']);
+
+        $this->data['breadcrumb']        = breadcrumb($this->data['idModule'],$this->data['idSubModule']);
+        $this->data['contenidoPrincial'] = 'inventario/stock';
+        $this->data['desc_mod_submod']   = $this->inventario_model->getDesd_mod_submod($this->data['idSubModule']);
+        $this->data['results']           = $this->inventario_model->getStockMin();
+        $this->load->view('main_template',$this->data);
+    }
 
 }
 ?>
